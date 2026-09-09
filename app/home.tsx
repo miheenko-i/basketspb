@@ -27,7 +27,7 @@ export default function Home() {
  const [videoReady,setVideoReady]=useState(false);
  useEffect(()=>{const query=window.matchMedia('(prefers-reduced-motion: reduce)');const update=()=>{const video=videoRef.current;if(!video)return;if(query.matches)video.pause();else void video.play().catch(()=>setVideoPlaying(false));};update();query.addEventListener('change',update);return()=>query.removeEventListener('change',update)},[]);
  const toggleVideo=()=>{const video=videoRef.current;if(!video)return;if(video.paused)void video.play().catch(()=>setVideoPlaying(false));else video.pause()};
- const venue=venues.find(v=>v.id===venueId)!;
+
  const openBooking=(choice='Баскетбольные навыки',location?:string)=>{if(location)setVenueId(location);setProgram(choice);setBooking(true)};
  useEffect(()=>{
   type ToolContext={registerTool:(tool:Record<string,unknown>,options:{signal:AbortSignal})=>void|Promise<void>};

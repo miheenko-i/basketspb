@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, type FormEvent } from 'react';
+import { useRef, useState, type SubmitEvent } from 'react';
 import { ArrowRight, Check, LoaderCircle, Phone } from 'lucide-react';
 import { DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -39,11 +39,12 @@ export function BookingForm({ venues, venueId, program, audience, onVenueChange,
     ? venue.sessions.map(s => `${s.days}: ${audience === 'adult' ? s.adult : s.child}`).join('; ')
     : 'Расписание и доступность группы уточнит администратор.';
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     if (submitting.current) return;
     const data = new FormData(event.currentTarget);
-    const phone = String(data.get('Телефон') || '').replace(/\D/g, '');
+    const phoneValue = data.get('Телефон');
+    const phone = (typeof phoneValue === 'string' ? phoneValue : '').replace(/\D/g, '');
     if (phone.length < 10 || phone.length > 15) {
       setError('Укажите номер телефона полностью, с кодом страны.');
       event.currentTarget.querySelector<HTMLInputElement>('[name="Телефон"]')?.focus();
@@ -73,7 +74,7 @@ export function BookingForm({ venues, venueId, program, audience, onVenueChange,
     }
   }
 
-  if (status === 'success') return <div className="booking-success" role="status">
+  if (status === 'success') return <div className="booking-success" aria-live="polite">
     <span className="booking-success-icon"><Check size={28}/></span>
     <DialogTitle className="booking-title">ЗАЯВКА ОТПРАВЛЕНА</DialogTitle>
     <DialogDescription className="booking-description">Мы свяжемся с вами, чтобы подтвердить время тренировки.</DialogDescription>
@@ -100,12 +101,12 @@ export function BookingForm({ venues, venueId, program, audience, onVenueChange,
           <label htmlFor="booking-contact" className="sr-only">{contactMethod === 'Telegram' ? 'Имя пользователя или телефон в Telegram' : 'Ссылка на страницу ВК'}</label>
           <Input id="booking-contact" name="Страница или контакт" placeholder={contactMethod === 'Telegram' ? '@username или номер телефона' : 'Ссылка на страницу ВК'} required maxLength={200} className="booking-input"/>
         </fieldset>
-        <label>Направление *<Select value={program} onValueChange={value => value && onProgramChange(value)}><SelectTrigger className="booking-select"><SelectValue/></SelectTrigger><SelectContent>{programs.map(value => <SelectItem value={value} key={value}>{value}</SelectItem>)}</SelectContent></Select></label>
-        <label>Зал *<Select value={venueId} onValueChange={value => value && onVenueChange(value)}><SelectTrigger className="booking-select"><SelectValue>{venue.name}</SelectValue></SelectTrigger><SelectContent>{venues.map(v => <SelectItem value={v.id} key={v.id}>{v.name}</SelectItem>)}</SelectContent></Select></label>
-        <label className="booking-full">Откуда о нас узнали *<Select value={source} onValueChange={setSource}><SelectTrigger className="booking-select"><SelectValue placeholder="Выберите вариант"/></SelectTrigger><SelectContent>{sources.map(value => <SelectItem value={value} key={value}>{value}</SelectItem>)}</SelectContent></Select></label>
+        <label htmlFor="booking-program">Направление *<Select value={program} onValueChange={value => value && onProgramChange(value)}><SelectTrigger id="booking-program" className="booking-select"><SelectValue/></SelectTrigger><SelectContent>{programs.map(value => <SelectItem value={value} key={value}>{value}</SelectItem>)}</SelectContent></Select></label>
+        <label htmlFor="booking-venue">Зал *<Select value={venueId} onValueChange={value => value && onVenueChange(value)}><SelectTrigger id="booking-venue" className="booking-select"><SelectValue>{venue.name}</SelectValue></SelectTrigger><SelectContent>{venues.map(v => <SelectItem value={v.id} key={v.id}>{v.name}</SelectItem>)}</SelectContent></Select></label>
+        <label htmlFor="booking-source" className="booking-full">Откуда о нас узнали *<Select value={source} onValueChange={setSource}><SelectTrigger id="booking-source" className="booking-select"><SelectValue placeholder="Выберите вариант"/></SelectTrigger><SelectContent>{sources.map(value => <SelectItem value={value} key={value}>{value}</SelectItem>)}</SelectContent></Select></label>
         <label htmlFor="booking-message" className="booking-full">Сообщение <span className="optional-label">Необязательно</span><Textarea id="booking-message" name="Сообщение" placeholder="Что нам стоит знать перед тренировкой?" maxLength={3000} rows={3} className="booking-input booking-textarea"/></label>
         <label htmlFor="booking-promo" className="booking-full">Промокод <span className="optional-label">Если есть</span><Input id="booking-promo" name="Промокод" placeholder="Введите промокод" autoComplete="off" maxLength={60} className="booking-input"/></label>
-        <div className="booking-honeypot" aria-hidden="true"><label>Оставьте пустым<Input name="_honey" tabIndex={-1} autoComplete="off"/></label></div>
+        <div className="booking-honeypot" aria-hidden="true"><label htmlFor="booking-website">Оставьте пустым<Input id="booking-website" name="_honey" tabIndex={-1} autoComplete="off"/></label></div>
       </fieldset>
       <div className="booking-summary"><Check size={18}/><span>{program === 'Индивидуальная тренировка' ? 'Индивидуальное занятие — от 3 000 ₽.' : 'Первое групповое занятие — бесплатно.'}<small>{schedule}</small></span></div>
       {error && <p className="booking-error" role="alert">{error}</p>}
