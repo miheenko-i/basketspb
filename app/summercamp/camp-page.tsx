@@ -37,4 +37,3 @@ export default function CampPage() {
     <SiteFooter camp/>
   </div>;
 }
-

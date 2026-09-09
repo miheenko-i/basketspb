@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { sendBooking } from '@/lib/booking';
+import { referralSources } from '@/lib/site';
 
 type Venue = {
   id: string;
@@ -26,7 +27,6 @@ type Props = {
   onClose: () => void;
 };
 const programs = ['Баскетбольные навыки', 'Баскетбольный фристайл', 'Индивидуальная тренировка'];
-const sources = ['Поиск Яндекс', 'Поиск 2 GIS', 'Поиск Google', 'Узнали от друзей', 'Instagram', 'VK', 'YouTube'];
 
 export function BookingForm({ venues, venueId, program, audience, onVenueChange, onProgramChange, onAudienceChange, onClose }: Props) {
   const [contactMethod, setContactMethod] = useState('Telegram');
@@ -103,7 +103,7 @@ export function BookingForm({ venues, venueId, program, audience, onVenueChange,
         </fieldset>
         <label htmlFor="booking-program">Направление *<Select value={program} onValueChange={value => value && onProgramChange(value)}><SelectTrigger id="booking-program" className="booking-select"><SelectValue/></SelectTrigger><SelectContent>{programs.map(value => <SelectItem value={value} key={value}>{value}</SelectItem>)}</SelectContent></Select></label>
         <label htmlFor="booking-venue">Зал *<Select value={venueId} onValueChange={value => value && onVenueChange(value)}><SelectTrigger id="booking-venue" className="booking-select"><SelectValue>{venue.name}</SelectValue></SelectTrigger><SelectContent>{venues.map(v => <SelectItem value={v.id} key={v.id}>{v.name}</SelectItem>)}</SelectContent></Select></label>
-        <label htmlFor="booking-source" className="booking-full">Откуда о нас узнали *<Select value={source} onValueChange={setSource}><SelectTrigger id="booking-source" className="booking-select"><SelectValue placeholder="Выберите вариант"/></SelectTrigger><SelectContent>{sources.map(value => <SelectItem value={value} key={value}>{value}</SelectItem>)}</SelectContent></Select></label>
+        <label htmlFor="booking-source" className="booking-full">Откуда о нас узнали *<Select value={source} onValueChange={setSource}><SelectTrigger id="booking-source" className="booking-select"><SelectValue placeholder="Выберите вариант"/></SelectTrigger><SelectContent>{referralSources.map(value => <SelectItem value={value} key={value}>{value}</SelectItem>)}</SelectContent></Select></label>
         <label htmlFor="booking-message" className="booking-full">Сообщение <span className="optional-label">Необязательно</span><Textarea id="booking-message" name="Сообщение" placeholder="Что нам стоит знать перед тренировкой?" maxLength={3000} rows={3} className="booking-input booking-textarea"/></label>
         <label htmlFor="booking-promo" className="booking-full">Промокод <span className="optional-label">Если есть</span><Input id="booking-promo" name="Промокод" placeholder="Введите промокод" autoComplete="off" maxLength={60} className="booking-input"/></label>
         <div className="booking-honeypot" aria-hidden="true"><label htmlFor="booking-website">Оставьте пустым<Input id="booking-website" name="_honey" tabIndex={-1} autoComplete="off"/></label></div>
