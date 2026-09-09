@@ -106,3 +106,41 @@
 @media(max-width:1100px){.venue-section .schedule-body{grid-template-columns:1fr 1.8fr;gap:25px}.time-button{font-size:15px;gap:5px}.session-days{font-size:14px}}
 @media(max-width:900px){.venue-section .schedule-body{grid-template-columns:1fr}.schedule-table th:first-child{width:34%}.time-button{font-size:18px;gap:10px}.schedule-table td{padding-block:18px}.venue-section .venue-info h3{margin-top:10px}}
 @media(max-width:640px){.schedule-table{font-size:13px}.schedule-table th{font-size:13px;padding-bottom:14px}.schedule-table th small{font-size:11px}.schedule-table td{padding:16px 8px 16px 0}.schedule-table th:first-child{width:31%}.session-days{font-size:12px}.time-button{font-size:13px;gap:3px;letter-spacing:-.025em}.time-button svg{width:12px;height:12px}.schedule-bottom{flex-wrap:wrap;font-size:12px;gap:14px}.schedule-bottom .text-link{font-size:12px}.schedule-table th:last-child,.schedule-table td:last-child{padding-right:0}}
+.booking-dialog{max-width:720px!important;padding:36px!important}
+.booking-form{display:grid;gap:20px;min-width:0}
+.required-note{color:#737373;font-size:12px}
+.booking-form .booking-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;border:0;margin:0;padding:0;min-width:0}
+.booking-fields>label{display:flex;flex-wrap:wrap;flex-direction:row;align-content:start;align-items:baseline;gap:8px;font-size:14px;line-height:1.4;min-width:0}
+.booking-full{grid-column:1/-1}
+.booking-input{height:48px!important;padding:12px 14px!important;border:1px solid #d4d4d4!important;border-radius:3px!important;background:#fafafa!important;font-size:16px!important;font-weight:400;line-height:1.4!important}
+.booking-input:focus-visible{border-color:#131313!important;outline:2px solid #131313;outline-offset:2px;box-shadow:none!important}
+.booking-form .booking-select{height:auto!important;min-height:48px;border-color:#d4d4d4!important;background:#fafafa!important;font-size:15px!important;white-space:normal;text-align:left}
+.booking-select [data-slot=select-value]{text-align:left;white-space:normal}
+.booking-contact{border:0;margin:0;padding:0;min-width:0}
+.booking-contact legend{font-size:14px;font-weight:500;padding:0;margin-bottom:10px}
+.contact-methods{display:flex!important;gap:26px!important;margin-bottom:14px}
+.contact-methods label{display:flex!important;flex-direction:row!important;align-items:center;gap:9px!important;font-size:14px!important;cursor:pointer}
+.contact-methods [data-slot=radio-group-item]{width:18px;height:18px}
+.booking-textarea{height:auto!important;min-height:95px!important;resize:vertical;field-sizing:fixed}
+.optional-label{margin-left:auto;color:#777;font-weight:400;font-size:12px}
+.booking-form .booking-summary{font-size:14px;border-radius:3px}
+.booking-form .booking-summary small{font-size:13px}
+.booking-honeypot{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.booking-form .booking-submit{margin:0;min-height:56px;font-size:16px}
+.booking-submit:disabled{opacity:.65;transform:none}
+.booking-form .booking-note{font-size:12px;text-align:left;margin-top:-8px}
+.booking-note a{text-decoration:underline;text-underline-offset:3px}
+.booking-form .booking-phone{font-size:14px}
+.booking-error{color:#a12515;background:#fff1ed;border-left:3px solid #c84020;padding:12px 14px;font-size:14px;line-height:1.5}
+.booking-success{display:grid;justify-items:start;gap:24px;padding-block:24px}
+.booking-success-icon{background:#f1f1f1;width:56px;height:56px;border-radius:50%;display:grid;place-items:center}
+.submission-spinner{animation:booking-spin 1s linear infinite}
+@keyframes booking-spin{to{transform:rotate(360deg)}}
+.price-card .price-label{display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:10px;min-height:24px;width:100%}
+.price-card .saving-badge{margin:0;padding:5px 7px;font-size:9px;line-height:1.3;white-space:nowrap}
+.price-card.featured-price strong{font-size:clamp(35px,3.5vw,57px);margin-top:22px}
+.featured-price .price-note{font-size:13px;color:#ff936d;font-weight:600}
+.schedule-table tbody tr:last-child td{border-bottom:0}
+@media(max-width:1100px){.price-card .price-label{flex-wrap:wrap;align-content:start;min-height:44px}}
+@media(max-width:900px){.price-card .price-label{flex-wrap:nowrap;min-height:24px}.price-card.featured-price strong{font-size:48px}}
+@media(max-width:640px){.booking-dialog{padding:34px 22px 24px!important}.booking-form{gap:18px}.booking-form .booking-fields{grid-template-columns:1fr;gap:18px}.booking-full{grid-column:auto}.booking-form .booking-select{font-size:16px!important}.booking-form .booking-phone{font-size:13px}.price-card strong,.price-card.featured-price strong{font-size:35px;margin-top:23px}.price-card .price-label{flex-wrap:wrap;align-content:start;min-height:48px}.price-card .price-note,.featured-price .price-note{font-size:12px}.price-card{min-height:240px}}
