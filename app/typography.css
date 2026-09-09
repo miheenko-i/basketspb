@@ -1,0 +1,318 @@
+/* Shared type roles for both pages. The 26 / 42 / 68 display anchors are
+   approximately a golden-ratio progression; reading and UI sizes stay closer.
+   rem bounds respect the reader's font preference, with restrained fluid growth. */
+:root {
+  --type-meta: .8125rem;
+  --type-label: .875rem;
+  --type-control: 1rem;
+  --type-body: clamp(1rem, .95rem + .2vw, 1.125rem);
+  --type-lead: clamp(1.125rem, 1rem + .5vw, 1.5rem);
+  --type-card: clamp(1.625rem, 1.375rem + .65vw, 2.125rem);
+  --type-feature: clamp(2rem, 1.625rem + 1vw, 2.625rem);
+  --type-section: clamp(2.25rem, 1.75rem + 2.1vw, 4.25rem);
+  --type-price: clamp(2rem, 1.5rem + 2vw, 3.25rem);
+  --leading-body: 1.6;
+  --leading-heading: 1.08;
+  --text-secondary: #667078;
+}
+
+html { font-size: 100%; }
+body { font-size: 1rem; line-height: var(--leading-body); }
+.hero .button,
+.camp-hero .button,
+.camp-explore { line-height: 1.5; }
+
+/* Keep the approved hero treatment independent of the section type scale. */
+h2,
+.about-heading h2,
+.trial-section h2,
+.camp-booking-intro h2 {
+  font-size: var(--type-section);
+  line-height: var(--leading-heading);
+  letter-spacing: -.025em;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+
+h3,
+.coaches h3,
+.venue-section .venue-info h3,
+.team-cards h3,
+.growth-steps h3,
+.camp-activities h3,
+.camp-album h3,
+.camp-videos h3 {
+  font-size: var(--type-card);
+  font-weight: 800;
+  line-height: 1.16;
+  letter-spacing: -.02em;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+
+.program-title {
+  font-size: var(--type-feature);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -.025em;
+}
+
+.section-heading > p,
+.section-intro,
+.about-intro {
+  font-size: var(--type-lead);
+  line-height: 1.5;
+  letter-spacing: 0;
+  max-width: 58ch;
+  text-wrap: pretty;
+  overflow-wrap: anywhere;
+}
+
+.section-heading > p { color: var(--text-secondary); }
+.price-section .section-heading > p { color: #b5c1ca; }
+.about-intro { font-weight: 500; }
+.section-heading { gap: 1.25rem; }
+.section-intro { margin-top: 1.25rem; }
+
+.program-description,
+.growth-steps p,
+.about-description,
+.coaches p,
+.team-description,
+.camp-activities p,
+.camp-album > p,
+.camp-booking-intro > p:not(.eyebrow),
+.news-copy p {
+  font-size: var(--type-body);
+  font-weight: 400;
+  line-height: var(--leading-body);
+  letter-spacing: 0;
+  color: var(--text-secondary);
+  max-width: 60ch;
+  text-wrap: pretty;
+  overflow-wrap: anywhere;
+}
+
+.program-copy { gap: 1rem; }
+.coaches h3 { margin-bottom: .875rem; }
+.team-description,
+.camp-activities p,
+.news-copy p { margin-top: 1rem; }
+.home-page .team-label { font-size: var(--type-label); line-height: 1.5; }
+.growth-number { font-size: var(--type-feature); }
+
+/* Editorial titles use the reading face, distinct from section headings. */
+.news-copy h3 {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: clamp(1.25rem, 1.125rem + .65vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -.015em;
+  text-wrap: pretty;
+}
+.news-date { font-size: var(--type-label); line-height: 1.5; }
+.news-more[data-slot="button"] { font-size: var(--type-control); line-height: 1.4; }
+
+/* Readable labels and controls; text may wrap instead of being clipped. */
+.section .button,
+.trial-section .button,
+.booking-form .button,
+.booking-success .button,
+.text-link,
+.program-footnote,
+.price-action {
+  font-size: var(--type-control);
+  line-height: 1.4;
+  letter-spacing: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.button > svg,
+.text-link > svg,
+.program-footnote svg,
+.price-action > svg { flex-shrink: 0; }
+.program-cta { font-size: var(--type-label); line-height: 1.4; }
+.program-cta > span { line-height: inherit; }
+.program-footnote a { min-width: 0; }
+
+.facts-strip,
+.camp-facts { font-size: var(--type-label); line-height: 1.5; letter-spacing: .025em; }
+.facts-strip > span { min-width: 0; overflow-wrap: anywhere; }
+.facts-strip span + span::before { margin-right: clamp(1rem, 3vw, 3rem); }
+.announcement { font-size: var(--type-meta); line-height: 1.4; padding: .375rem 1rem; }
+.site-header { height: auto; min-height: 5.125rem; padding-block: .75rem; }
+.site-header nav,
+.site-header .button { font-size: var(--type-label); line-height: 1.4; }
+.header-actions { min-width: 0; }
+.mobile-menu-dialog nav a { font-size: var(--type-lead); line-height: 1.4; }
+.mobile-menu-dialog { max-height: calc(100svh - 2rem); overflow-y: auto; }
+
+.venue-info p,
+.venue-section .venue-info > p,
+.session-days { font-size: var(--type-body); line-height: 1.5; }
+.venue-info p span { color: var(--text-secondary); }
+.venue-address,
+.venue-address a,
+.venue-place { overflow-wrap: anywhere; }
+.venue-anchors a { font-size: var(--type-label); line-height: 1.4; }
+.schedule-table th,
+.schedule-table th small { font-size: var(--type-label); line-height: 1.5; }
+.schedule-table th small { color: var(--text-secondary); }
+.session-days { hyphens: auto; overflow-wrap: anywhere; }
+.time-button {
+  font-size: var(--type-control);
+  line-height: 1.5;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+  max-width: 100%;
+  min-height: 2.75rem;
+  white-space: normal;
+}
+.time-range { min-width: 0; }
+
+.price-card strong,
+.price-card.featured-price strong {
+  font-size: var(--type-price);
+  line-height: 1.12;
+  letter-spacing: -.035em;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.price-card .price-label { font-size: var(--type-control); line-height: 1.4; flex-wrap: wrap; min-height: 3rem; align-content: start; }
+.price-card .saving-badge { font-size: .75rem; line-height: 1.4; letter-spacing: 0; white-space: normal; }
+.price-card .price-note,
+.featured-price .price-note { font-size: var(--type-control); line-height: 1.5; }
+.price-terms,
+.price-terms .season-note,
+.price-documents details p,
+.rules-link small { font-size: var(--type-label); line-height: var(--leading-body); }
+.price-documents details p { max-width: 65ch; }
+.price-documents summary,
+.rules-link { font-size: var(--type-control); line-height: 1.5; }
+
+.camp-shift strong { font-size: var(--type-feature); line-height: 1.15; letter-spacing: -.02em; }
+.camp-shift > span { font-size: var(--type-control); line-height: 1.5; }
+.camp-date-note { font-size: var(--type-label); line-height: 1.5; }
+.camp-price-table th { font-size: var(--type-control); line-height: 1.5; }
+.camp-price-table .camp-price-name { font-size: var(--type-lead); line-height: 1.4; }
+.camp-price-table tbody .camp-price-name { color: #fff; padding-block: 1.5rem; text-align: left; }
+.camp-price-choice strong { font-size: var(--type-price); line-height: 1.12; letter-spacing: -.035em; font-variant-numeric: lining-nums tabular-nums; }
+.camp-price-choice > span { font-size: var(--type-label); line-height: 1.5; }
+.camp-video-grid figcaption,
+.camp-lightbox-controls,
+.camp-contact-details,
+.camp-contact-details > p:last-child,
+.camp-contact-details .venue-place { font-size: var(--type-label); line-height: 1.5; }
+.camp-contact-details > a:first-child { font-size: var(--type-lead); }
+.camp-contact-details > a { max-width: 100%; overflow-wrap: anywhere; }
+.camp-lightbox-heading h2 { font-size: var(--type-control); font-weight: 500; line-height: 1.4; letter-spacing: 0; }
+
+.booking-title { font-size: var(--type-feature) !important; line-height: 1.12 !important; letter-spacing: -.025em; }
+.booking-description { font-size: var(--type-control) !important; line-height: var(--leading-body); }
+.booking-fields > label,
+.booking-contact legend,
+.booking-form .booking-summary,
+.booking-form .booking-summary small,
+.booking-form .booking-phone,
+.booking-error,
+.camp-selected-package strong { font-size: var(--type-label); line-height: 1.5; }
+.contact-methods label { font-size: var(--type-label) !important; }
+.required-note,
+.optional-label,
+.booking-form .booking-note,
+.camp-selected-package span { font-size: var(--type-meta); line-height: 1.6; }
+.required-note,
+.optional-label,
+.booking-form .booking-note,
+.booking-form .booking-summary small,
+.camp-selected-package span { color: var(--text-secondary); }
+.booking-input,
+.booking-form .booking-select {
+  font-size: var(--type-control) !important;
+  line-height: 1.5 !important;
+  height: auto !important;
+  min-height: 3rem;
+}
+.booking-select [data-slot="select-value"] {
+  -webkit-line-clamp: unset;
+  overflow: visible;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+[data-slot="select-content"] { font-size: var(--type-control) !important; line-height: 1.5; }
+[data-slot="select-item"] { white-space: normal; overflow-wrap: anywhere; }
+.booking-phone { flex-wrap: wrap; }
+.booking-success > p { font-size: var(--type-body); line-height: var(--leading-body); }
+
+.footer-top > div { min-width: 0; }
+.footer-top > div > p,
+.footer-links a,
+.footer-contact a,
+.footer-contact span,
+.footer-socials a { font-size: var(--type-label); line-height: 1.6; overflow-wrap: anywhere; max-width: 100%; }
+.footer-contact a:first-child { font-size: var(--type-lead); line-height: 1.4; letter-spacing: 0; }
+.footer-socials > span,
+.footer-bottom,
+.footer-bottom > a:nth-child(2),
+.footer-legal { font-size: var(--type-meta); line-height: 1.6; letter-spacing: 0; }
+
+/* Adapt the available reading space before reducing the type size. */
+@media (max-width: 84rem) {
+  .site-header nav { display: none; }
+  .site-header .mobile-menu-button { display: block; }
+}
+
+@media (max-width: 56.25rem) {
+  .facts-strip { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.5rem; }
+  .facts-strip span + span::before { display: none; }
+  .facts-strip span:nth-child(even) { text-align: right; }
+}
+
+@media (max-width: 40rem) {
+  .site-header { min-height: 4.5rem; }
+  .site-header .wordmark { width: clamp(7.25rem, 32vw, 11.25rem); }
+  .announcement { flex-wrap: wrap; gap: .25rem .75rem; }
+  .announcement span { border: 0; padding-left: 0; }
+  .facts-strip { letter-spacing: 0; }
+  .time-button { gap: .25rem; align-items: flex-start; }
+  .time-button svg { margin-top: .25em; }
+  .venue-anchors { grid-auto-columns: minmax(7.5rem, calc((100% - 2rem) / 2.45)); }
+  .growth-steps li { grid-template-columns: 2.5rem minmax(0, 1fr); gap: .75rem 1rem; }
+  .growth-number { font-size: 2rem; }
+  .camp-shift { grid-template-columns: minmax(0, 1fr) 1.5rem; gap: .5rem 1rem; }
+  .camp-shift > span { grid-column: 1; }
+  .camp-shift strong { grid-column: 1; }
+  .camp-shift > svg { grid-column: 2; grid-row: 1 / 3; }
+  .footer-top { grid-template-columns: minmax(0, 1fr); }
+  .footer-top > div:first-child { grid-column: auto; }
+  .trial-section > div,
+  .trial-action { min-width: 0; max-width: 100%; }
+  .news-copy p { grid-column: 1 / -1; }
+  /* Keep both meal options visible at a readable size on narrow screens.
+     Explicit table roles in the markup retain the row/column relationships. */
+  .camp-price-table,
+  .camp-price-table thead,
+  .camp-price-table tbody { display: block; }
+  .camp-price-table tr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1rem; }
+  .camp-price-table thead th:first-child { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .camp-price-table th,
+  .camp-price-table td { min-width: 0; padding: 1rem 0; }
+  .camp-price-table tbody .camp-price-name { grid-column: 1 / -1; width: auto; padding-block: 1rem 0; border-bottom: 0; font-size: var(--type-control); font-weight: 600; }
+  .camp-price-choice { padding: 0 0 .5rem; }
+  .camp-price-choice strong { font-size: 1.75rem; }
+}
+
+@media (max-width: 30rem) {
+  .price-grid { grid-template-columns: minmax(0, 1fr); }
+  .price-card,
+  .price-card:first-child,
+  .price-card:nth-child(3),
+  .price-card.featured-price { padding: 1.5rem !important; border-left: 0; min-height: 0; }
+  .price-card .price-label { min-height: 0; }
+  .price-card .price-note { margin-bottom: 0; min-height: 0; }
+  .news-item { grid-template-columns: 6rem minmax(0, 1fr); }
+  .news-copy { display: contents; }
+  .news-copy h3 { grid-column: 2; grid-row: 2; }
+  .news-copy p { margin-top: .5rem; }
+}
