@@ -117,10 +117,49 @@
   object-position: center 30%;
 }
 
-@media (min-width: 1181px) {
-  .hero h1 {
-    font-size: clamp(76px, 10.1vw, 158px);
+@media (min-width: 641px) {
+  .hero,
+  .camp-hero {
+    --hero-top-offset: 82px;
+    height: calc(90svh - var(--hero-top-offset));
+    grid-template-rows: minmax(0, 1fr);
+    align-items: stretch;
   }
+
+  .home-page .hero { --hero-top-offset: 116px; }
+
+  .hero-media,
+  .camp-hero-media {
+    height: 100%;
+    aspect-ratio: auto;
+    align-self: stretch;
+  }
+
+  .hero-main,
+  .camp-hero-content {
+    align-self: end;
+    padding-block: clamp(24px, 4svh, 56px) 96px;
+  }
+
+  .hero h1 { font-size: clamp(64px, min(10.1vw, 16svh), 158px); }
+  .camp-hero h1 { font-size: clamp(54px, min(7.9vw, 15svh), 120px); }
+  .hero-audience {
+    font-size: clamp(20px, 3.3svh, 35px);
+    margin-top: clamp(16px, 2.5svh, 24px);
+  }
+  .hero-bottom { margin-top: clamp(18px, 3svh, 28px); }
+}
+
+/* Preserve readable text in short landscape windows without clipping controls. */
+@media (min-width: 641px) and (max-height: 620px) {
+  .hero,
+  .camp-hero {
+    height: auto;
+    min-height: 420px;
+    grid-template-rows: auto;
+  }
+  .hero-media,
+  .camp-hero-media { position: absolute; inset: 0; }
 }
 
 @media (max-width: 640px) {

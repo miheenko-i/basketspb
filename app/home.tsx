@@ -8,6 +8,7 @@ import { BookingForm } from '@/components/booking-form';
 import { SiteHeader, SiteFooter } from '@/components/site-shell';
 import { visitRules } from '@/lib/site';
 import { HeroTitle } from '@/components/hero-title';
+import { createHeroPlayback } from '@/lib/hero-playback';
 
 const venues = [
  {id:'chkalovskaya',line:5,color:'#8b4a96',name:'Чкаловская',address:'Газовая улица, 10, корпус Ж',place:'м. Чкаловская / Петроградская',kids:'6–13 лет',sessions:[{days:'Понедельник, пятница',adult:'20:30 — 21:30',child:'19:30 — 20:30'}]},
@@ -24,8 +25,18 @@ export default function Home() {
  const videoRef=useRef<HTMLVideoElement>(null);
  const [videoPlaying,setVideoPlaying]=useState(false);
  const [videoReady,setVideoReady]=useState(false);
- useEffect(()=>{const query=window.matchMedia('(prefers-reduced-motion: reduce)');const update=()=>{const video=videoRef.current;if(!video)return;if(query.matches)video.pause();else void video.play().catch(()=>setVideoPlaying(false));};update();query.addEventListener('change',update);return()=>query.removeEventListener('change',update)},[]);
- const toggleVideo=()=>{const video=videoRef.current;if(!video)return;if(video.paused)void video.play().catch(()=>setVideoPlaying(false));else video.pause()};
+ const playbackRef=useRef<ReturnType<typeof createHeroPlayback> | null>(null);
+ useEffect(()=>{
+  const video=videoRef.current;
+  if(!video)return;
+  const playback=createHeroPlayback(video,{document,window,motion:window.matchMedia('(prefers-reduced-motion: reduce)')},state=>{
+   setVideoPlaying(state.playing);
+   setVideoReady(state.ready);
+  });
+  playbackRef.current=playback;
+  return()=>{playbackRef.current=null;playback.dispose()};
+ },[]);
+ const toggleVideo=()=>playbackRef.current?.toggle();
 
  const openBooking=(choice='Баскетбольные навыки',location?:string)=>{if(location)setVenueId(location);setProgram(choice);setBooking(true)};
  useEffect(()=>{
@@ -40,7 +51,7 @@ export default function Home() {
   <a className="announcement" href="#schedule">Новый сезон 2026 / 27 <span>Первая тренировка — бесплатно</span><ArrowUpRight size={14}/></a>
   <SiteHeader onBooking={()=>openBooking()}/>
   <main id="main">
-   <section className="hero" aria-labelledby="hero-title"><div className="hero-media"><img className="hero-image" src="/basketspb/images/hero-poster.jpg" alt="Баскетбольная тренировка" fetchPriority="high" width="1600" height="900"/><video ref={videoRef} className={`hero-video ${videoReady?'is-ready':''}`} muted loop playsInline preload="metadata" poster="/basketspb/images/hero-poster.jpg" aria-label="Видео баскетбольной тренировки" onCanPlay={()=>setVideoReady(true)} onPlaying={()=>setVideoPlaying(true)} onPause={()=>setVideoPlaying(false)} onError={()=>{setVideoReady(false);setVideoPlaying(false)}}><source src="/basketspb/videos/hero.mp4" type="video/mp4"/></video><div className="hero-shade"/><button className="hero-video-control" onClick={toggleVideo} aria-label={videoPlaying?'Приостановить видео':'Воспроизвести видео'}>{videoPlaying?<Pause size={17}/>:<Play size={17}/>}</button></div><div className="hero-main"><HeroTitle id="hero-title" lines={["БАСКЕТБОЛ", "В СПБ."]} subtitle="Для новичков и любителей"/><div className="hero-bottom"><button className="button orange-button" onClick={()=>openBooking()}>Начать бесплатно <ArrowUpRight size={20}/></button><p>Взрослые и дети.<br/>Баскетбол и баскетбольный фристайл.</p></div></div><a className="hero-down" href="#programs" aria-label="К направлениям"><ArrowDown size={20}/></a></section>
+   <section className="hero" aria-labelledby="hero-title"><div className="hero-media"><img className="hero-image" src="/basketspb/images/hero-poster.jpg" alt="Баскетбольная тренировка" fetchPriority="high" width="1600" height="900"/><video ref={videoRef} className={`hero-video ${videoReady?'is-ready':''}`} muted loop playsInline preload="auto" poster="/basketspb/images/hero-poster.jpg" aria-label="Видео баскетбольной тренировки"><source src="/basketspb/videos/hero.mp4" type="video/mp4"/></video><div className="hero-shade"/><button className="hero-video-control" onClick={toggleVideo} aria-label={videoPlaying?'Приостановить видео':'Воспроизвести видео'}>{videoPlaying?<Pause size={17}/>:<Play size={17}/>}</button></div><div className="hero-main"><HeroTitle id="hero-title" lines={["БАСКЕТБОЛ", "В СПБ."]} subtitle="Для новичков и любителей"/><div className="hero-bottom"><button className="button orange-button" onClick={()=>openBooking()}>Начать бесплатно <ArrowUpRight size={20}/></button><p>Взрослые и дети.<br/>Баскетбол и баскетбольный фристайл.</p></div></div><a className="hero-down" href="#programs" aria-label="К направлениям"><ArrowDown size={20}/></a></section>
    <div className="facts-strip"><span>ЛЮБОЙ УРОВЕНЬ</span><span>5 ЗАЛОВ В ГОРОДЕ</span><span>ДЕТИ И ВЗРОСЛЫЕ</span><span>ПРОБНОЕ ЗАНЯТИЕ БЕСПЛАТНО</span></div>
    <section className="section programs" id="programs"><div className="section-heading"><div><h2>НАПРАВЛЕНИЯ</h2></div><p>Научиться мастерски играть в баскетбол или же виртуозно овладеть баскетбольным мячом?</p></div><div className="program-grid">
     <article className="program-card"><button className="program-media" onClick={()=>openBooking('Баскетбольные навыки')} aria-label="Баскетбол — записать на пробное занятие"><img src="/basketspb/images/basketball.jpg" alt="Групповая тренировка по дриблингу" loading="lazy" width="1680" height="1120"/><span className="program-cta" aria-hidden="true"><span>Записать на пробное занятие</span><ArrowUpRight size={22}/></span></button><div className="program-copy"><h3 className="program-title">БАСКЕТБОЛ</h3><p className="program-description">Постановка броска, дриблинг и финты. Развитие скорости, координации и выносливости. Общая физическая подготовка.</p></div></article>
