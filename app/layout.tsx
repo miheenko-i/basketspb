@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ScrollReveals } from '@/components/scroll-reveals';
 import './globals.css';
 import './camp.css';
+import './wide-layout.css';
 export const metadata: Metadata = {
  metadataBase: new URL('https://miheenko-i.github.io/basketspb/'),
  title: 'Баскетбол для новичков и любителей в Санкт-Петербурге | YO BALLER',
