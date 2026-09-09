@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogClose } from '@/components/ui/dialog';
 import { visitRules } from '@/lib/site';
+import { privacyUrl } from '@/lib/privacy';
 
 const mainNav = [
   { href: '#programs', label: 'Направления' },
@@ -36,7 +37,7 @@ export function SiteFooter({ camp = false }: { camp?: boolean }) {
   return <footer className="site-footer">
     <div className="footer-top"><div><Brand camp={camp}/><p>Баскетбол для новичков и любителей.<br/>Санкт-Петербург.</p></div><div className="footer-links"><a href={home + '#schedule'}>Расписание</a><a href={home + '#team'}>Преподаватели</a><a href={home + '#teams'}>Команды</a><a href="/basketspb/summercamp/">Летний лагерь</a></div><div className="footer-contact"><a href="tel:+79117292545">+7 911 729-25-45</a><a href="mailto:rasseloneup@mail.ru">rasseloneup@mail.ru</a><span>Офис: пн–пт, 12:00–17:00</span></div></div>
     <nav className="footer-socials" aria-label="Социальные сети"><span>МЫ В СОЦСЕТЯХ</span><a href="https://vk.com/yoballerspb" target="_blank" rel="noreferrer">ВКонтакте <ArrowUpRight size={16}/></a><a href="https://t.me/yoballerspb" target="_blank" rel="noreferrer">Telegram <ArrowUpRight size={16}/></a><a href="https://www.youtube.com/channel/UCwAA_JZ8-31jW-zqcY6mXOg" target="_blank" rel="noreferrer">YouTube <ArrowUpRight size={16}/></a></nav>
-    <div className="footer-bottom"><span>© 2026 YO BALLER</span><a href={visitRules} target="_blank" rel="noreferrer">Правила посещения <ArrowUpRight size={13}/></a><span>Концепция редизайна</span><a href="#top" aria-label="Наверх">Наверх ↑</a></div>
+    <div className="footer-bottom"><span>© 2026 YO BALLER</span><a href={visitRules} target="_blank" rel="noreferrer">Правила посещения <ArrowUpRight size={13}/></a><a href={privacyUrl}>Политика обработки персональных данных</a><span>Концепция редизайна</span><a href="#top" aria-label="Наверх">Наверх ↑</a></div>
     <div className="footer-legal"><span>ИП Боравский Руслан Генрихович</span><span>ИНН 781901726463</span><span>ОГРНИП 325784700268009</span></div>
   </footer>;
 }
