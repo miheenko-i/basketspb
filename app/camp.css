@@ -33,12 +33,12 @@
 .camp-price-choice>span{grid-row:2;font-size:14px;color:#b5c1ca;margin-top:10px}
 .camp-price-choice>svg{grid-column:2;grid-row:1/3;color:#8eb7d4}
 .camp-price-choice:hover strong,.camp-price-choice:hover svg{color:#ef827a}
-.camp-life-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
-.camp-life-grid img{display:block;width:100%;aspect-ratio:1.4;object-fit:cover;object-position:center 30%;background:#e4e8eb}
-.camp-life-grid article:last-child img{object-position:center 24%}
-.camp-life-grid h3{font-size:35px;margin-top:25px}
-.camp-life-grid p{font-size:16px;color:#667078;line-height:1.6;max-width:530px;margin-top:16px}
-.camp-life-grid .text-link{font-size:14px;gap:13px}
+
+
+
+
+
+
 .camp-booking-section{display:grid;grid-template-columns:1fr 1.15fr;gap:70px;background:#eef1f3;align-items:start}
 .camp-booking-intro h2{font-size:clamp(38px,4.7vw,66px);margin-top:18px}
 .camp-booking-intro>p:not(.eyebrow){font-size:16px;line-height:1.6;color:#64717a;margin-top:24px}
@@ -52,7 +52,34 @@
 .camp-selected-package span{font-size:12px;color:#6a737b}
 .camp-selected-package strong{font-size:14px;line-height:1.5;font-weight:500}
 @media(max-width:1000px){.camp-hero{min-height:580px}.camp-activities{gap:30px 24px}.camp-activities h3{font-size:27px}.camp-booking-section{gap:35px;grid-template-columns:1fr 1.3fr}.camp-booking-form{padding:25px}.camp-contact-details>a:first-child{font-size:20px}.camp-booking-form .booking-fields{grid-template-columns:1fr}.camp-booking-form .booking-full{grid-column:auto}}
-@media(max-width:760px){.camp-activities{grid-template-columns:1fr 1fr}.camp-shift{grid-template-columns:90px 1fr 25px;gap:12px}.camp-booking-section{grid-template-columns:1fr;gap:35px}.camp-booking-form .booking-fields{grid-template-columns:1fr 1fr}.camp-booking-form .booking-full{grid-column:1/-1}.camp-price-table th,.camp-price-table td{padding-inline:12px}.camp-price-choice strong{font-size:33px}.camp-price-choice>span{font-size:12px}.camp-price-table .camp-price-name{font-size:18px}.camp-life-grid h3{font-size:30px}}
-@media(max-width:640px){.camp-hero{min-height:570px;padding-block:48px;align-items:flex-end}.camp-hero h1{font-size:clamp(49px,10.7vw,66px);margin-top:23px}.camp-hero-description{font-size:15px;margin-top:25px}.camp-hero-actions{gap:19px;margin-top:24px}.camp-explore{font-size:14px}.camp-hero-image{object-position:57% center}.camp-hero-shade{background:linear-gradient(0deg,#000c,#0004 80%)}.camp-facts{font-size:10px}.camp-activities{grid-template-columns:1fr;gap:25px}.camp-activities article{display:grid;grid-template-columns:30px 1fr;column-gap:14px;row-gap:12px;padding-top:21px}.camp-activity-number{grid-row:1/3;margin-top:4px}.camp-activities h3{font-size:28px;max-width:none;margin:0}.camp-activities p{font-size:15px;max-width:none;margin:0;grid-column:2}.camp-shift{grid-template-columns:62px 1fr 20px;gap:9px;padding-block:22px}.camp-shift>span{font-size:13px}.camp-shift strong{font-size:28px}.camp-shift>svg{width:19px}.camp-date-note{font-size:13px}.camp-price-table th{font-size:13px;padding:15px 7px}.camp-price-table th:first-child{width:25%;overflow-wrap:anywhere}.camp-price-table td{padding-inline:7px}.camp-price-table .camp-price-name{font-size:15px}.camp-price-choice{display:block;padding-block:25px}.camp-price-choice strong{font-size:clamp(24px,6vw,32px)}.camp-price-choice>span{display:block;font-size:11px;white-space:normal;margin-top:9px}.camp-price-choice>svg{display:none}.camp-life-grid{grid-template-columns:1fr;gap:40px}.camp-life-grid img{aspect-ratio:1.3}.camp-life-grid h3{font-size:32px;margin-top:20px}.camp-life-grid p{font-size:15px;margin-top:13px}.camp-booking-form{padding:25px 20px}.camp-booking-form .booking-fields{grid-template-columns:1fr}.camp-booking-form .booking-full{grid-column:auto}.camp-contact-details{margin-top:25px}.camp-booking-intro h2{font-size:43px}}
+@media(max-width:760px){.camp-activities{grid-template-columns:1fr 1fr}.camp-shift{grid-template-columns:90px 1fr 25px;gap:12px}.camp-booking-section{grid-template-columns:1fr;gap:35px}.camp-booking-form .booking-fields{grid-template-columns:1fr 1fr}.camp-booking-form .booking-full{grid-column:1/-1}.camp-price-table th,.camp-price-table td{padding-inline:12px}.camp-price-choice strong{font-size:33px}.camp-price-choice>span{font-size:12px}.camp-price-table .camp-price-name{font-size:18px}}
+@media(max-width:640px){.camp-hero{min-height:570px;padding-block:48px;align-items:flex-end}.camp-hero h1{font-size:clamp(49px,10.7vw,66px);margin-top:23px}.camp-hero-description{font-size:15px;margin-top:25px}.camp-hero-actions{gap:19px;margin-top:24px}.camp-explore{font-size:14px}.camp-hero-image{object-position:57% center}.camp-hero-shade{background:linear-gradient(0deg,#000c,#0004 80%)}.camp-facts{font-size:10px}.camp-activities{grid-template-columns:1fr;gap:25px}.camp-activities article{display:grid;grid-template-columns:30px 1fr;column-gap:14px;row-gap:12px;padding-top:21px}.camp-activity-number{grid-row:1/3;margin-top:4px}.camp-activities h3{font-size:28px;max-width:none;margin:0}.camp-activities p{font-size:15px;max-width:none;margin:0;grid-column:2}.camp-shift{grid-template-columns:62px 1fr 20px;gap:9px;padding-block:22px}.camp-shift>span{font-size:13px}.camp-shift strong{font-size:28px}.camp-shift>svg{width:19px}.camp-date-note{font-size:13px}.camp-price-table th{font-size:13px;padding:15px 7px}.camp-price-table th:first-child{width:25%;overflow-wrap:anywhere}.camp-price-table td{padding-inline:7px}.camp-price-table .camp-price-name{font-size:15px}.camp-price-choice{display:block;padding-block:25px}.camp-price-choice strong{font-size:clamp(24px,6vw,32px)}.camp-price-choice>span{display:block;font-size:11px;white-space:normal;margin-top:9px}.camp-price-choice>svg{display:none}.camp-booking-form{padding:25px 20px}.camp-booking-form .booking-fields{grid-template-columns:1fr}.camp-booking-form .booking-full{grid-column:auto}.camp-contact-details{margin-top:25px}.camp-booking-intro h2{font-size:43px}}
 .camp-page .section-heading h2,.camp-booking-intro h2,.camp-hero h1{margin-top:0}
 .camp-activities article{display:block}.camp-activities h3{margin-top:0}.camp-activities p{margin-top:16px}
+
+.camp-albums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:34px}
+.camp-album{min-width:0;display:flex;flex-direction:column}
+.camp-album h3,.camp-videos h3{font-size:clamp(28px,3vw,38px);line-height:1.06}
+.camp-album>p{font-size:16px;color:#667078;line-height:1.6;margin:16px 0 24px;max-width:530px}
+.camp-photo-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:auto}
+.camp-photo{position:relative;display:block;aspect-ratio:1;border:0;padding:0;overflow:hidden;background:#e4e8eb;cursor:zoom-in}
+.camp-photo img{width:100%;height:100%;object-fit:cover;object-position:center 35%;transition:transform .2s}
+.camp-photo-expand{position:absolute;bottom:7px;right:7px;color:white;filter:drop-shadow(0 1px 3px #000)}
+.camp-photo:hover img{transform:scale(1.04)}
+.camp-lightbox[data-slot="dialog-content"]{width:calc(100% - 32px);max-width:1120px;padding:16px;border-radius:0;gap:12px;background:#171b1e;color:#fff;max-height:calc(100dvh - 24px)}
+.camp-lightbox-heading{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.camp-lightbox-heading h2{font-family:'Roboto',Arial,sans-serif;font-size:18px;letter-spacing:0;line-height:1.4}
+.camp-lightbox-image{display:block;width:100%;height:calc(100dvh - 180px);max-height:760px;min-height:0;object-fit:contain}
+.camp-lightbox-controls{display:flex;align-items:center;justify-content:center;gap:28px;font-size:14px;font-variant-numeric:tabular-nums}
+.camp-media-control{width:44px;height:44px;flex-shrink:0;display:grid;place-items:center;border:1px solid #69747c;background:transparent;color:#fff;border-radius:50%}
+.camp-media-control:hover{background:#34434e}
+body:has(.camp-lightbox) [data-slot="dialog-overlay"]{background:#000c;backdrop-filter:blur(5px)}
+.camp-videos{display:grid;grid-template-columns:1fr 2fr;gap:34px;margin-top:54px;align-items:start}
+.camp-video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;max-width:650px}
+.camp-video-grid figure{margin:0;min-width:0}
+.camp-video-grid video{display:block;width:100%;height:auto;aspect-ratio:9/16;object-fit:contain;background:#171b1e}
+.camp-video-grid figcaption{display:flex;justify-content:space-between;gap:12px;margin-top:14px;font-size:14px;line-height:1.5}
+.camp-video-grid figcaption>span:last-child{color:#667078;white-space:nowrap}
+@media(max-width:900px){.camp-albums{gap:28px}.camp-photo-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.camp-videos{grid-template-columns:1fr;gap:25px}.camp-video-grid{max-width:620px}}
+@media(max-width:640px){.camp-albums{grid-template-columns:1fr;gap:36px}.camp-album>p{margin:13px 0 20px}.camp-photo-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.camp-photo-expand{width:13px;height:13px;bottom:5px;right:5px}.camp-videos{margin-top:38px}.camp-video-grid{gap:12px}.camp-video-grid figcaption{display:block;margin-top:10px}.camp-video-grid figcaption>span{display:block}.camp-video-grid figcaption>span:last-child{margin-top:5px}.camp-lightbox[data-slot="dialog-content"]{width:calc(100% - 16px);padding:12px}.camp-lightbox-heading h2{font-size:16px}.camp-lightbox-controls{gap:25px}}
+@media(prefers-reduced-motion:reduce){.camp-photo img{transition:none}}

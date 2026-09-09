@@ -185,3 +185,14 @@
 @media(max-width:1180px){.site-header nav{display:none}.site-header .mobile-menu-button{display:block}.site-header .wordmark{width:235px}}
 @media(max-width:900px){.team-cards{gap:22px}.team-cards h3{font-size:28px}.team-description{font-size:14px}.footer-legal{column-gap:22px}}
 @media(max-width:640px){.site-header{height:72px;gap:12px}.site-header .wordmark{width:clamp(116px,37vw,180px)}.team-cards{grid-template-columns:1fr;gap:38px}.team-cards img{aspect-ratio:1.13}.team-cards h3{font-size:36px}.team-description{font-size:15px}.team-label{margin-top:19px}.footer-socials{gap:18px 25px;padding-bottom:26px}.footer-socials>span{flex-basis:100%}.footer-socials a{font-size:13px}.footer-legal{flex-direction:column;gap:7px;font-size:11px}.mobile-menu-dialog nav a{font-size:21px;padding-block:14px}}
+
+.home-page .hero{justify-content:flex-end}
+.home-page .section-heading h2,.home-page .about-heading h2,.home-page .trial-section h2,.home-page .venue-info h3{margin-top:0}
+.home-page .coaches h3{margin-top:0}
+.home-page .team-cards h3{margin-top:24px}
+.home-page .team-label{margin-top:10px;text-transform:none;letter-spacing:0;font-size:14px}
+@media(max-width:640px){
+ .venue-anchors{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(110px,calc((100% - 32px)/2.45));gap:16px;justify-content:start;overflow-x:auto;scroll-snap-type:x proximity;overscroll-behavior-inline:contain;scrollbar-width:thin;scrollbar-color:#aab2b9 transparent;padding-bottom:14px}
+ .venue-anchors a{min-width:0;padding:12px 0;font-size:14px;scroll-snap-align:start;justify-content:center}
+ .venue-anchors a>svg{display:none}
+}
