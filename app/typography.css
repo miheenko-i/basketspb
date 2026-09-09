@@ -95,12 +95,19 @@ h3,
 .program-copy { gap: 1rem; }
 .program-skill[data-slot="badge"] { font-size: var(--type-body); font-weight: 500; line-height: 1.4; letter-spacing: 0; }
 .coaches h3 { margin-bottom: .875rem; }
-.coaches .coach-role { color: #171b1e; font-weight: 600; }
+.coaches .coach-role,
+.home-page .team-label {
+  font-size: var(--type-body);
+  font-weight: 600;
+  line-height: var(--leading-body);
+  letter-spacing: 0;
+  text-transform: none;
+  color: #171b1e;
+}
 .coaches .coach-role + p { margin-top: .625rem; }
 .team-description,
 .camp-activities p,
 .news-copy p { margin-top: 1rem; }
-.home-page .team-label { font-size: var(--type-label); line-height: 1.5; }
 .growth-number { font-size: var(--type-feature); }
 
 /* Editorial titles use the reading face, distinct from section headings. */
