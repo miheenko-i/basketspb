@@ -23,7 +23,7 @@
   background: #e1e5e8;
 }
 .news-copy { min-width: 0; }
-.news-date { color: #667078; }
+.news-date { color: #667078; justify-self: end; text-align: right; }
 .news-copy h3 { margin: 0; overflow-wrap: break-word; }
 .news-copy h3:focus-visible { outline: 2px solid #6ca1c9; outline-offset: 6px; }
 .news-copy p { max-width: 62ch; color: #535b60; margin-top: 18px; overflow-wrap: break-word; }

@@ -8,19 +8,22 @@ type PlaybackEnvironment = {
 export function createHeroPlayback(
   video: HTMLVideoElement,
   environment: PlaybackEnvironment,
-  onState: (state: { playing: boolean; ready: boolean; muted: boolean }) => void,
+  onState: (state: { playing: boolean; ready: boolean; muted: boolean; volume: number }) => void,
 ) {
   const { document: page, window: browser, motion } = environment;
   let intent: 'auto' | 'play' = 'auto';
   let disposed = false;
   let pending: Promise<void> | null = null;
   let retryAfterPending = false;
+  let audibleVolume = .5;
 
   function report() {
+    if (video.volume > 0) audibleVolume = video.volume;
     if (!disposed) onState({
       playing: !video.paused && !video.ended && !video.error,
       ready: video.readyState >= 2 && !video.error,
       muted: video.muted || video.volume === 0,
+      volume: video.volume,
     });
   }
 
@@ -73,6 +76,7 @@ export function createHeroPlayback(
 
   video.muted = true;
   video.defaultMuted = true;
+  video.volume = .5;
   video.playsInline = true;
   video.addEventListener('loadeddata', onReady);
   video.addEventListener('canplay', onReady);
@@ -92,7 +96,17 @@ export function createHeroPlayback(
       const enableSound = video.muted || video.volume === 0;
       video.muted = !enableSound;
       if (enableSound) {
-        if (video.volume === 0) video.volume = 1;
+        if (video.volume === 0) video.volume = audibleVolume;
+        intent = 'play';
+        start();
+      }
+      report();
+    },
+    setVolume(volume: number) {
+      if (disposed || !Number.isFinite(volume)) return;
+      video.volume = Math.max(0, Math.min(1, volume));
+      video.muted = video.volume === 0;
+      if (!video.muted) {
         intent = 'play';
         start();
       }

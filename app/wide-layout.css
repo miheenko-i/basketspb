@@ -74,16 +74,43 @@
   pointer-events: auto;
 }
 
-.hero-video-control {
+.hero-audio-control {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 164px;
+  height: 47px;
+  padding-right: 15px;
+  border: 1px solid #ffffff80;
+  border-radius: 999px;
+  background: #171b1eb8;
+  color: #fff;
   z-index: 2;
   bottom: 30px;
   right: var(--hero-gutter);
 }
 
+.hero-audio-control .hero-video-control {
+  position: static;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  background: transparent;
+}
+.hero-audio-control .hero-video-control:hover { background: #ffffff20; }
+.hero-volume[data-slot="slider"] { flex: 1; min-width: 0; width: auto; }
+.hero-volume > div { min-height: 40px; }
+.hero-volume [data-slot="slider-track"] { height: 4px; background: #ffffff50; }
+.hero-volume [data-slot="slider-range"] { background: #fff; }
+.hero-volume [data-slot="slider-thumb"] { width: 14px; height: 14px; border: 0; background: #fff; }
+.hero-volume [data-slot="slider-thumb"]:focus-within { outline: 2px solid #fff; outline-offset: 3px; }
+
 .hero-down {
   z-index: 2;
   bottom: 30px;
-  right: calc(var(--hero-gutter) + 59px);
+  right: calc(var(--hero-gutter) + 176px);
 }
 
 /* Fill bounded media frames while preserving the source image proportions. */
@@ -182,6 +209,7 @@
   .camp-hero-content { padding-block: 32px 40px; }
   .hero-media .hero-shade,
   .camp-hero-media .camp-hero-shade { background: linear-gradient(0deg, #171b1e70, transparent 45%); }
-  .hero-video-control { right: 18px; bottom: 18px; }
+  .hero-audio-control { right: 18px; bottom: 18px; width: 148px; height: 42px; }
+  .hero-audio-control .hero-video-control { flex-basis: 36px; width: 36px; height: 36px; }
   .hero-down { right: var(--page-gutter); bottom: 43px; }
 }

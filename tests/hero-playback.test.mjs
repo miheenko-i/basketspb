@@ -44,7 +44,8 @@ test('cached media is visible without waiting for another canplay event', async 
   assert.equal(video.autoplay, true);
   assert.equal(video.muted, true);
   assert.equal(video.defaultMuted, true);
-  assert.deepEqual(states.at(-1), { playing: true, ready: true, muted: true });
+  assert.equal(video.volume, .5);
+  assert.deepEqual(states.at(-1), { playing: true, ready: true, muted: true, volume: .5 });
   playback.dispose();
 });
 
@@ -162,10 +163,52 @@ test('the control reflects zero volume and restores audible volume on activation
   video.dispatchEvent(new Event('volumechange'));
   assert.equal(states.at(-1).muted, true);
   playback.toggleSound();
-  assert.equal(video.volume, 1);
+  assert.equal(video.volume, .5);
   assert.equal(video.muted, false);
   assert.equal(states.at(-1).muted, false);
   playback.dispose();
+});
+
+test('slider changes unmute audio, zero mutes, and the button restores the chosen level', async () => {
+  const { video, playback, states, page } = setup();
+  await settle();
+  playback.setVolume(.3);
+  assert.equal(video.volume, .3);
+  assert.equal(video.muted, false);
+  assert.equal(states.at(-1).volume, .3);
+  playback.toggleSound();
+  assert.equal(video.volume, .3);
+  assert.equal(video.muted, true);
+  playback.toggleSound();
+  assert.equal(video.volume, .3);
+  playback.setVolume(0);
+  assert.equal(video.muted, true);
+  assert.equal(video.paused, false);
+  playback.toggleSound();
+  assert.equal(video.volume, .3);
+  assert.equal(video.muted, false);
+  page.visibilityState = 'hidden';
+  page.dispatchEvent(new Event('visibilitychange'));
+  page.visibilityState = 'visible';
+  page.dispatchEvent(new Event('visibilitychange'));
+  await settle();
+  assert.equal(video.volume, .3);
+  assert.equal(video.muted, false);
+  playback.dispose();
+});
+
+test('volume input stays in bounds and ignores invalid values', async () => {
+  const { video, playback } = setup();
+  await settle();
+  playback.setVolume(2);
+  assert.equal(video.volume, 1);
+  playback.setVolume(-1);
+  assert.equal(video.volume, 0);
+  playback.setVolume(NaN);
+  assert.equal(video.volume, 0);
+  playback.dispose();
+  playback.setVolume(.8);
+  assert.equal(video.volume, 0);
 });
 
 test('disposing removes lifecycle listeners and ignores a pending attempt', async () => {
