@@ -6,7 +6,7 @@
 }
 .news-item {
   display: grid;
-  grid-template-columns: minmax(0, 24%) minmax(0, 1fr) minmax(150px, 16%);
+  grid-template-columns: minmax(0, min(24%, 260px)) minmax(0, 1fr) minmax(150px, 16%);
   align-items: start;
   gap: clamp(24px, 2vw, 36px);
   min-width: 0;
