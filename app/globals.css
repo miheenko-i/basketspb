@@ -146,6 +146,11 @@
 @media(max-width:640px){.booking-dialog{padding:34px 22px 24px!important}.booking-form{gap:18px}.booking-form .booking-fields{grid-template-columns:1fr;gap:18px}.booking-full{grid-column:auto}.booking-form .booking-select{font-size:16px!important}.booking-form .booking-phone{font-size:13px}.price-card strong,.price-card.featured-price strong{font-size:35px;margin-top:23px}.price-card .price-label{flex-wrap:wrap;align-content:start;min-height:48px}.price-card .price-note,.featured-price .price-note{font-size:12px}.price-card{min-height:240px}}
 
 /* YO BALLER identity, traced from the supplied logo. */
+.venue-address a{display:inline-flex;align-items:baseline;gap:7px;max-width:100%;color:#171717}
+.venue-address a svg{flex-shrink:0;align-self:flex-start;margin-top:4px}
+.venue-info .venue-address a span{color:inherit}
+.venue-address a:hover{color:#b23833;text-decoration:underline;text-underline-offset:4px}
+.venue-address .venue-place{display:block;margin-top:3px}
 .wordmark{display:inline-flex;align-items:center;width:clamp(205px,21vw,290px);flex-shrink:0;line-height:1}
 .wordmark img{display:block;width:100%;height:auto}
 .site-footer .wordmark{width:270px;max-width:100%}
