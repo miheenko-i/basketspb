@@ -11,6 +11,7 @@ const mainNav = [
   { href: '#prices', label: 'Стоимость' },
   { href: '#team', label: 'Преподаватели' },
   { href: '#teams', label: 'Команды' },
+  { href: '#news', label: 'Новости' },
   { href: '/basketspb/summercamp/', label: 'Летний лагерь' },
 ];
 export function Brand({ camp = false }: { camp?: boolean }) {

@@ -17,6 +17,7 @@ const targets = [
   '.about-grid > div:first-child',
   '.coaches > article',
   '.team-cards > article',
+  '.news-item',
   '.camp-activities > article',
   '.camp-shift-list > button',
   '.camp-date-note',
