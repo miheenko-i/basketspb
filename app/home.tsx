@@ -11,9 +11,9 @@ import { visitRules } from '@/lib/site';
 const venues = [
  {id:'chkalovskaya',line:5,color:'#8b4a96',name:'Чкаловская',address:'Газовая улица, 10, корпус Ж',place:'м. Чкаловская / Петроградская',kids:'6–13 лет',sessions:[{days:'Понедельник, пятница',adult:'20:30 — 21:30',child:'19:30 — 20:30'}]},
  {id:'lesnaya',line:1,color:'#d32932',name:'Лесная',address:'Улица Карбышева, 9',place:'Спортивный центр «Триада»',kids:'7–13 лет',sessions:[{days:'Вторник, четверг',adult:'18:30 — 19:30',child:'18:30 — 19:30'}]},
+ {id:'vyborgskaya',line:1,color:'#d32932',name:'Выборгская',address:'Евпаторийский переулок, 7Д',place:'Спортивный центр BASKET SPACE',kids:null,sessions:[{days:'Воскресенье',adult:'18:00 — 19:00',child:null}]},
  {id:'begovaya',line:3,color:'#178f54',name:'Беговая',address:'Приморский проспект, 72',place:'ТРК «Питерлэнд», 3 этаж',kids:'7–13 лет',sessions:[{days:'Понедельник',adult:'19:00 — 20:00',child:'18:00 — 19:00'},{days:'Суббота',adult:'20:00 — 21:00',child:'20:00 — 21:00'}]},
  {id:'park',line:2,color:'#2373b6',name:'Парк Победы',address:'Бассейная улица, 38к',place:'Спортивный центр URBO',kids:'7–13 лет',sessions:[{days:'Среда',adult:'19:00 — 20:00',child:'19:00 — 20:00'}]},
- {id:'vyborgskaya',line:1,color:'#d32932',name:'Выборгская',address:'Евпаторийский переулок, 7Д',place:'Спортивный центр BASKET SPACE',kids:null,sessions:[{days:'Воскресенье',adult:'18:00 — 19:00',child:null}]},
 ];
 export default function Home() {
  const [venueId,setVenueId]=useState('chkalovskaya');
