@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, type CSSProperties } from 'react';
 import { ArrowLeft, ArrowRight, Expand, X } from 'lucide-react';
 import { Dialog, DialogContent, DialogClose, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import { campAlbums, campVideos, type CampAlbum } from '@/lib/camp-media';
@@ -10,21 +10,39 @@ function PhotoAlbum({ album }: { album: CampAlbum }) {
   const [index, setIndex] = useState(0);
   const photo = album.photos[index];
   const move = (step: number) => setIndex(current => (current + step + album.photos.length) % album.photos.length);
+  const rows = Array.from({ length: Math.ceil(album.photos.length / 4) }, (_, row) => album.photos.slice(row * 4, row * 4 + 4));
 
   return <article className="camp-album" aria-labelledby={`${album.id}-title`}>
     <h3 id={`${album.id}-title`}>{album.title}</h3>
     <p>{album.description}</p>
     <Dialog open={open} onOpenChange={setOpen}>
       <div className="camp-photo-grid">
-        {album.photos.map((item, photoIndex) => <DialogTrigger
-          key={item.id}
-          className="camp-photo"
-          onClick={() => setIndex(photoIndex)}
-          aria-label={`Увеличить фото ${photoIndex + 1} из ${album.photos.length}: ${item.alt}`}
-        >
-          <img src={`/basketspb/images/camp-gallery/${item.id}-thumb.webp`} alt={item.alt} width={item.width} height={item.height} loading="lazy" decoding="async"/>
-          <Expand size={16} className="camp-photo-expand" aria-hidden="true"/>
-        </DialogTrigger>)}
+        {rows.map((row, rowIndex) => <div className="camp-photo-row" key={row[0].id}>
+          {row.map((item, itemIndex) => {
+            const photoIndex = rowIndex * 4 + itemIndex;
+            const ratio = item.width / item.height;
+            const pairStart = Math.floor(itemIndex / 2) * 2;
+            const pairRatio = row.slice(pairStart, pairStart + 2).reduce((sum, image) => sum + image.width / image.height, 0);
+            const rowRatio = row.reduce((sum, image) => sum + image.width / image.height, 0);
+            const thumbWidth = Math.round(item.width * 640 / Math.max(item.width, item.height));
+            const imagePath = `/basketspb/images/camp-gallery/${item.id}`;
+            return <DialogTrigger
+              key={item.id}
+              className="camp-photo"
+              style={{ '--photo-ratio': ratio, '--pair-ratio': pairRatio } as CSSProperties}
+              onClick={() => setIndex(photoIndex)}
+              aria-label={`Увеличить фото ${photoIndex + 1} из ${album.photos.length}: ${item.alt}`}
+            >
+              <img
+                src={`${imagePath}-thumb.webp`}
+                srcSet={`${imagePath}-thumb.webp ${thumbWidth}w, ${imagePath}.webp ${item.width}w`}
+                sizes={`(max-width: 640px) ${(ratio / pairRatio * 100).toFixed(2)}vw, ${(ratio / rowRatio * 100).toFixed(2)}vw`}
+                alt={item.alt} width={item.width} height={item.height} loading="lazy" decoding="async"
+              />
+              <Expand size={18} className="camp-photo-expand" aria-hidden="true"/>
+            </DialogTrigger>;
+          })}
+        </div>)}
       </div>
       <DialogContent className="camp-lightbox" showCloseButton={false} onKeyDown={event => {
         if (event.key === 'ArrowLeft') { event.preventDefault(); move(-1); }

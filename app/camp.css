@@ -57,15 +57,16 @@
 .camp-page .section-heading h2,.camp-booking-intro h2,.camp-hero h1{margin-top:0}
 .camp-activities article{display:block}.camp-activities h3{margin-top:0}.camp-activities p{margin-top:16px}
 
-.camp-albums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:34px}
+.camp-albums{display:grid;grid-template-columns:minmax(0,1fr);gap:64px}
 .camp-album{min-width:0;display:flex;flex-direction:column}
 .camp-album h3,.camp-videos h3{font-size:clamp(28px,3vw,38px);line-height:1.06}
 .camp-album>p{font-size:16px;color:#667078;line-height:1.6;margin:16px 0 24px;max-width:530px}
-.camp-photo-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:auto}
-.camp-photo{position:relative;display:block;aspect-ratio:1;border:0;padding:0;overflow:hidden;background:#e4e8eb;cursor:zoom-in}
-.camp-photo img{width:100%;height:100%;object-fit:cover;object-position:center 35%;transition:transform .2s}
-.camp-photo-expand{position:absolute;bottom:7px;right:7px;color:white;filter:drop-shadow(0 1px 3px #000)}
-.camp-photo:hover img{transform:scale(1.04)}
+.camp-photo-grid{display:grid;gap:14px}
+.camp-photo-row{display:flex;align-items:flex-start;gap:14px}
+.camp-photo{position:relative;display:block;flex:var(--photo-ratio) 1 0%;min-width:0;aspect-ratio:var(--photo-ratio);border:0;padding:0;overflow:hidden;background:#e4e8eb;cursor:zoom-in}
+.camp-photo img{display:block;width:100%;height:auto;object-fit:contain;transition:filter .2s}
+.camp-photo-expand{position:absolute;bottom:12px;right:12px;color:white;filter:drop-shadow(0 1px 3px #000)}
+.camp-photo:hover img{filter:brightness(.94)}
 .camp-lightbox[data-slot="dialog-content"]{width:calc(100% - 32px);max-width:1120px;padding:16px;border-radius:0;gap:12px;background:#171b1e;color:#fff;max-height:calc(100dvh - 24px)}
 .camp-lightbox-heading{display:flex;justify-content:space-between;align-items:center;gap:16px}
 .camp-lightbox-heading h2{font-family:'Roboto',Arial,sans-serif;font-size:18px;letter-spacing:0;line-height:1.4}
@@ -80,6 +81,6 @@ body:has(.camp-lightbox) [data-slot="dialog-overlay"]{background:#000c;backdrop-
 .camp-video-grid video{display:block;width:100%;height:auto;aspect-ratio:9/16;object-fit:contain;background:#171b1e}
 .camp-video-grid figcaption{display:flex;justify-content:space-between;gap:12px;margin-top:14px;font-size:14px;line-height:1.5}
 .camp-video-grid figcaption>span:last-child{color:#667078;white-space:nowrap}
-@media(max-width:900px){.camp-albums{gap:28px}.camp-photo-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.camp-videos{grid-template-columns:1fr;gap:25px}.camp-video-grid{max-width:620px}}
-@media(max-width:640px){.camp-albums{grid-template-columns:1fr;gap:36px}.camp-album>p{margin:13px 0 20px}.camp-photo-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.camp-photo-expand{width:13px;height:13px;bottom:5px;right:5px}.camp-videos{margin-top:38px}.camp-video-grid{gap:12px}.camp-video-grid figcaption{display:block;margin-top:10px}.camp-video-grid figcaption>span{display:block}.camp-video-grid figcaption>span:last-child{margin-top:5px}.camp-lightbox[data-slot="dialog-content"]{width:calc(100% - 16px);padding:12px}.camp-lightbox-heading h2{font-size:16px}.camp-lightbox-controls{gap:25px}}
+@media(max-width:900px){.camp-albums{gap:52px}.camp-videos{grid-template-columns:1fr;gap:25px}.camp-video-grid{max-width:620px}}
+@media(max-width:640px){.camp-albums{gap:44px}.camp-album>p{margin:13px 0 20px}.camp-photo-grid{gap:10px}.camp-photo-row{flex-wrap:wrap;gap:10px}.camp-photo{flex:var(--photo-ratio) 1 calc((100% - 12px) * var(--photo-ratio) / var(--pair-ratio))}.camp-photo-expand{bottom:8px;right:8px}.camp-videos{margin-top:38px}.camp-video-grid{gap:12px}.camp-video-grid figcaption{display:block;margin-top:10px}.camp-video-grid figcaption>span{display:block}.camp-video-grid figcaption>span:last-child{margin-top:5px}.camp-lightbox[data-slot="dialog-content"]{width:calc(100% - 16px);padding:12px}.camp-lightbox-heading h2{font-size:16px}.camp-lightbox-controls{gap:25px}}
 @media(prefers-reduced-motion:reduce){.camp-photo img{transition:none}}
