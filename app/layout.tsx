@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import './camp.css';
 export const metadata: Metadata = {
  metadataBase: new URL('https://miheenko-i.github.io/basketspb/'),
  title: 'Баскетбол для новичков и любителей в Санкт-Петербурге | YO BALLER',

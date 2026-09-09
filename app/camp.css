@@ -1,0 +1,56 @@
+.camp-hero{position:relative;isolation:isolate;min-height:620px;display:flex;align-items:center;overflow:hidden;padding:65px var(--page-gutter);color:#fff;background:#1a2024}
+.camp-hero-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 65%;z-index:-3}
+.camp-hero-shade{position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,#000b 0%,#0005 70%,#0002),linear-gradient(0deg,#0006,transparent 65%)}
+.camp-hero-content{width:100%}
+.camp-hero h1{font-size:clamp(64px,7.9vw,120px);line-height:.94;letter-spacing:-.04em;max-width:1100px;margin-top:30px}
+.camp-hero-description{font-size:18px;line-height:1.6;margin-top:25px}
+.camp-hero-actions{display:flex;align-items:center;gap:30px;flex-wrap:wrap;margin-top:30px}
+.camp-explore{display:inline-flex;align-items:center;gap:12px;font-size:15px;border-bottom:1px solid #ffffff70;padding-block:7px}
+.camp-facts span+span:before{display:none}
+.camp-activities{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px 34px}
+.camp-activities article{border-top:1px solid #cbd0d4;padding-top:22px}
+.camp-activity-number{font-size:14px;color:#5284a7}
+.camp-activities h3{font-size:30px;line-height:1.05;margin-top:18px;max-width:300px}
+.camp-activities p{font-size:16px;color:#646b70;line-height:1.6;margin-top:16px;max-width:360px}
+.camp-shifts{background:#e5edf3}
+.camp-shift-list{border-top:1px solid #b8c6d1}
+.camp-shift{width:100%;border:0;border-bottom:1px solid #b8c6d1;background:none;color:#131313;padding:25px 0;display:grid;grid-template-columns:130px 1fr 30px;align-items:center;gap:20px;text-align:left}
+.camp-shift>span{font-size:16px;color:#5a6570}
+.camp-shift strong{font-family:'Roboto Condensed',Arial,sans-serif;font-size:clamp(30px,3.6vw,52px);font-weight:700;line-height:1.05;letter-spacing:-.025em}
+.camp-shift:hover strong,.camp-shift:hover svg{color:#ad3732}
+.camp-date-note{font-size:14px;color:#626d76;margin-top:22px}
+.camp-price-table{width:100%;table-layout:fixed;border-collapse:collapse}
+.camp-price-table th{color:#c2cbd1;white-space:normal;padding:18px 25px;border-bottom:1px solid #454e54;font-size:16px;font-weight:400}
+.camp-price-table th:first-child{padding-left:0;width:24%}
+.camp-price-table td{padding:0 25px;border-bottom:1px solid #454e54}
+.camp-price-table td:first-child{padding-left:0}
+.camp-price-table th:last-child,.camp-price-table td:last-child{padding-right:0}
+.camp-price-table tr:hover{background:transparent}
+.camp-price-table .camp-price-name{font-size:21px;white-space:normal;line-height:1.3}
+.camp-price-choice{background:none;border:0;color:white;display:grid;grid-template-columns:1fr 24px;column-gap:10px;align-items:center;width:100%;padding:27px 0;text-align:left}
+.camp-price-choice strong{font-size:clamp(28px,3.7vw,54px);font-weight:600;letter-spacing:-.04em;line-height:1.1;white-space:nowrap}
+.camp-price-choice strong small{font-size:.55em;font-weight:400}
+.camp-price-choice>span{grid-row:2;font-size:14px;color:#b5c1ca;margin-top:10px}
+.camp-price-choice>svg{grid-column:2;grid-row:1/3;color:#8eb7d4}
+.camp-price-choice:hover strong,.camp-price-choice:hover svg{color:#ef827a}
+.camp-life-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.camp-life-grid img{display:block;width:100%;aspect-ratio:1.4;object-fit:cover;object-position:center 30%;background:#e4e8eb}
+.camp-life-grid article:last-child img{object-position:center 24%}
+.camp-life-grid h3{font-size:35px;margin-top:25px}
+.camp-life-grid p{font-size:16px;color:#667078;line-height:1.6;max-width:530px;margin-top:16px}
+.camp-life-grid .text-link{font-size:14px;gap:13px}
+.camp-booking-section{display:grid;grid-template-columns:1fr 1.15fr;gap:70px;background:#eef1f3;align-items:start}
+.camp-booking-intro h2{font-size:clamp(38px,4.7vw,66px);margin-top:18px}
+.camp-booking-intro>p:not(.eyebrow){font-size:16px;line-height:1.6;color:#64717a;margin-top:24px}
+.camp-contact-details{margin-top:35px;display:flex;flex-direction:column;align-items:flex-start;gap:17px;font-size:15px}
+.camp-contact-details>a{display:flex;align-items:center;gap:9px}
+.camp-contact-details>a:first-child{font-size:23px;font-weight:500}
+.camp-contact-details>p:last-child{color:#64717a;font-size:14px}
+.camp-contact-details .venue-place{color:#64717a;font-size:14px}
+.camp-booking-form{background:#fff;padding:30px;min-width:0}
+.camp-selected-package{display:flex;flex-direction:column;gap:6px;border-left:3px solid #83b4d7;padding:8px 0 8px 15px}
+.camp-selected-package span{font-size:12px;color:#6a737b}
+.camp-selected-package strong{font-size:14px;line-height:1.5;font-weight:500}
+@media(max-width:1000px){.camp-hero{min-height:580px}.camp-activities{gap:30px 24px}.camp-activities h3{font-size:27px}.camp-booking-section{gap:35px;grid-template-columns:1fr 1.3fr}.camp-booking-form{padding:25px}.camp-contact-details>a:first-child{font-size:20px}.camp-booking-form .booking-fields{grid-template-columns:1fr}.camp-booking-form .booking-full{grid-column:auto}}
+@media(max-width:760px){.camp-activities{grid-template-columns:1fr 1fr}.camp-shift{grid-template-columns:90px 1fr 25px;gap:12px}.camp-booking-section{grid-template-columns:1fr;gap:35px}.camp-booking-form .booking-fields{grid-template-columns:1fr 1fr}.camp-booking-form .booking-full{grid-column:1/-1}.camp-price-table th,.camp-price-table td{padding-inline:12px}.camp-price-choice strong{font-size:33px}.camp-price-choice>span{font-size:12px}.camp-price-table .camp-price-name{font-size:18px}.camp-life-grid h3{font-size:30px}}
+@media(max-width:640px){.camp-hero{min-height:570px;padding-block:48px;align-items:flex-end}.camp-hero h1{font-size:clamp(49px,10.7vw,66px);margin-top:23px}.camp-hero-description{font-size:15px;margin-top:25px}.camp-hero-actions{gap:19px;margin-top:24px}.camp-explore{font-size:14px}.camp-hero-image{object-position:57% center}.camp-hero-shade{background:linear-gradient(0deg,#000c,#0004 80%)}.camp-facts{font-size:10px}.camp-activities{grid-template-columns:1fr;gap:25px}.camp-activities article{display:grid;grid-template-columns:30px 1fr;column-gap:14px;row-gap:12px;padding-top:21px}.camp-activity-number{grid-row:1/3;margin-top:4px}.camp-activities h3{font-size:28px;max-width:none;margin:0}.camp-activities p{font-size:15px;max-width:none;margin:0;grid-column:2}.camp-shift{grid-template-columns:62px 1fr 20px;gap:9px;padding-block:22px}.camp-shift>span{font-size:13px}.camp-shift strong{font-size:28px}.camp-shift>svg{width:19px}.camp-date-note{font-size:13px}.camp-price-table th{font-size:13px;padding:15px 7px}.camp-price-table th:first-child{width:25%;overflow-wrap:anywhere}.camp-price-table td{padding-inline:7px}.camp-price-table .camp-price-name{font-size:15px}.camp-price-choice{display:block;padding-block:25px}.camp-price-choice strong{font-size:clamp(24px,6vw,32px)}.camp-price-choice>span{display:block;font-size:11px;white-space:normal;margin-top:9px}.camp-price-choice>svg{display:none}.camp-life-grid{grid-template-columns:1fr;gap:40px}.camp-life-grid img{aspect-ratio:1.3}.camp-life-grid h3{font-size:32px;margin-top:20px}.camp-life-grid p{font-size:15px;margin-top:13px}.camp-booking-form{padding:25px 20px}.camp-booking-form .booking-fields{grid-template-columns:1fr}.camp-booking-form .booking-full{grid-column:auto}.camp-contact-details{margin-top:25px}.camp-booking-intro h2{font-size:43px}}

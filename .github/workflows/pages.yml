@@ -20,7 +20,9 @@ jobs:
       - run: npm ci
       - run: npm run build
       - name: Check exported site
-        run: test -f dist/client/index.html
+        run: |
+          test -f dist/client/index.html
+          test -f dist/client/summercamp/index.html
       - uses: actions/upload-pages-artifact@v4
         with:
           path: dist/client
