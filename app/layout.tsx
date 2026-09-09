@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { ScrollReveals } from '@/components/scroll-reveals';
 import './globals.css';
 import './camp.css';
 export const metadata: Metadata = {
@@ -9,5 +10,5 @@ export const metadata: Metadata = {
  icons: {icon:'/basketspb/favicon.svg'},
 };
 export default function RootLayout({children}: Readonly<{children: React.ReactNode}>) {
- return <html lang="ru"><body><a className="skip-link" href="#main">Перейти к содержимому</a>{children}</body></html>;
+ return <html lang="ru"><body><a className="skip-link" href="#main">Перейти к содержимому</a>{children}<ScrollReveals/></body></html>;
 }

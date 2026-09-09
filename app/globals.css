@@ -196,3 +196,10 @@
  .venue-anchors a{min-width:0;padding:12px 0;font-size:14px;scroll-snap-align:start;justify-content:center}
  .venue-anchors a>svg{display:none}
 }
+
+[data-reveal]{transition:opacity 460ms cubic-bezier(.22,1,.36,1),translate 460ms cubic-bezier(.22,1,.36,1);transition-delay:var(--reveal-delay,0ms)}
+[data-reveal="pending"]{opacity:0;translate:0 14px}
+[data-reveal="visible"]{opacity:1;translate:0 0}
+[data-reveal]:focus-within{opacity:1;translate:0 0;transition:none}
+@media(prefers-reduced-motion:reduce){[data-reveal]{opacity:1;translate:none;transition:none}}
+@media print{[data-reveal]{opacity:1;translate:none;transition:none}}
