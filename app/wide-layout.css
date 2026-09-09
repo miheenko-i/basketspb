@@ -82,19 +82,15 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: max-content;
-  max-width: calc(100% - 36px);
-  height: auto;
-  min-height: 48px;
-  gap: 10px;
-  padding: 12px 18px;
+  width: 56px;
+  height: 56px;
+  padding: 0;
   border: 1px solid #ffffff80;
-  border-radius: 999px;
+  border-radius: 50%;
   background: #171b1ed9;
   color: #fff;
-  font-size: 14px;
-  white-space: normal;
 }
+.hero-play-button[data-slot="button"] svg { width: 22px; height: 22px; transform: translateX(1px); }
 .hero-play-button[data-slot="button"]:hover { background: #171b1e; }
 
 .hero-audio-control {

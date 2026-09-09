@@ -13,7 +13,7 @@ type Props = {
 
 export function HeroAudioControl({ muted, volume, needsPlay, onPlay, onToggle, onVolumeChange }: Props) {
   return <>
-    {needsPlay && <Button className="hero-play-button" onClick={onPlay}><Play size={18}/>Воспроизвести видео</Button>}
+    {needsPlay && <Button className="hero-play-button" onClick={onPlay} aria-label="Воспроизвести видео"><Play size={22} fill="currentColor" aria-hidden="true"/></Button>}
     <div className="hero-audio-control">
     <button className="hero-video-control" onClick={onToggle}
       aria-label={muted ? 'Включить звук видео' : 'Выключить звук видео'}
