@@ -24,13 +24,13 @@
   padding-inline: var(--hero-gutter);
 }
 
-/* Match the supplied media instead of stretching it into shallow wide boxes. */
+/* Fill bounded media frames while preserving the source image proportions. */
 .program-card {
   aspect-ratio: 3 / 2;
 }
 
 .program-card img {
-  object-fit: contain;
+  object-fit: cover;
   transition: filter .2s;
 }
 
@@ -45,14 +45,14 @@
 }
 
 .coach-photo img {
-  object-fit: contain;
-  object-position: center;
+  object-fit: cover;
+  object-position: center 18%;
 }
 
 .team-cards img {
   height: auto;
-  object-fit: contain;
-  object-position: center;
+  object-fit: cover;
+  object-position: center 30%;
 }
 
 @media (min-width: 1181px) {
@@ -74,7 +74,7 @@
   .hero-image,
   .hero-video,
   .camp-hero-image {
-    object-fit: contain;
+    object-fit: cover;
     object-position: center;
   }
 
