@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 
 // Observe individual content blocks, rather than revealing a whole long section at once.
 const targets = [
-  '.facts-strip',
   '.section-heading',
   '.about-heading',
   '.program-card',
