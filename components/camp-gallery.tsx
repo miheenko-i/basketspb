@@ -36,7 +36,7 @@ function PhotoAlbum({ album }: { album: CampAlbum }) {
               <img
                 src={`${imagePath}-thumb.webp`}
                 srcSet={`${imagePath}-thumb.webp ${thumbWidth}w, ${imagePath}.webp ${item.width}w`}
-                sizes={`(max-width: 640px) ${(ratio / pairRatio * 100).toFixed(2)}vw, (min-width: 1600px) ${Math.ceil(ratio / rowRatio * 1440)}px, ${(ratio / rowRatio * 100).toFixed(2)}vw`}
+                sizes={`(max-width: 640px) ${(ratio / pairRatio * 100).toFixed(2)}vw, (min-width: 1920px) ${Math.ceil(ratio / rowRatio * 1760)}px, ${(ratio / rowRatio * 100).toFixed(2)}vw`}
                 alt={item.alt} width={item.width} height={item.height} loading="lazy" decoding="async"
               />
               <Expand size={18} className="camp-photo-expand" aria-hidden="true"/>

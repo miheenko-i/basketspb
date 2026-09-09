@@ -1,7 +1,7 @@
 /* Keep section backgrounds full width, with a shared, centered content edge. */
 :root {
-  --content-width: 1440px;
-  --hero-width: 1600px;
+  --content-width: 1760px;
+  --hero-width: 1920px;
 }
 
 .section,
