@@ -275,10 +275,12 @@ h3,
   .site-header .wordmark { width: clamp(7.25rem, 32vw, 11.25rem); }
   .announcement { flex-wrap: wrap; gap: .25rem .75rem; }
   .announcement span { border: 0; padding-left: 0; }
-  .facts-strip { letter-spacing: 0; }
+  .facts-strip { grid-template-columns: minmax(0, 1fr); gap: .75rem; justify-items: start; letter-spacing: 0; }
+  .facts-strip span:nth-child(even) { text-align: left; }
   .time-button { gap: .25rem; align-items: flex-start; }
   .time-button svg { margin-top: .25em; }
-  .venue-anchors { grid-auto-columns: minmax(7.5rem, calc((100% - 2rem) / 2.45)); }
+  .venue-anchors { display: flex; gap: .5rem; }
+  .venue-anchors a { flex: 0 0 auto; justify-content: flex-start; gap: .375rem; }
   .growth-steps li { grid-template-columns: 2.5rem minmax(0, 1fr); gap: .75rem 1rem; }
   .growth-number { font-size: 2rem; }
   .camp-shift { grid-template-columns: minmax(0, 1fr) 1.5rem; gap: .5rem 1rem; }

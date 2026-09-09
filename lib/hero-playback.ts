@@ -4,14 +4,14 @@ type PlaybackEnvironment = {
   motion: Pick<MediaQueryList, 'matches' | 'addEventListener' | 'removeEventListener'>;
 };
 
-/** Start/restart only on media readiness or page lifecycle events; preserve manual pause. */
+/** Start on readiness/lifecycle events; sound stays off until explicitly enabled. */
 export function createHeroPlayback(
   video: HTMLVideoElement,
   environment: PlaybackEnvironment,
-  onState: (state: { playing: boolean; ready: boolean }) => void,
+  onState: (state: { playing: boolean; ready: boolean; muted: boolean }) => void,
 ) {
   const { document: page, window: browser, motion } = environment;
-  let intent: 'auto' | 'play' | 'pause' = 'auto';
+  let intent: 'auto' | 'play' = 'auto';
   let disposed = false;
   let pending: Promise<void> | null = null;
   let retryAfterPending = false;
@@ -20,12 +20,13 @@ export function createHeroPlayback(
     if (!disposed) onState({
       playing: !video.paused && !video.ended && !video.error,
       ready: video.readyState >= 2 && !video.error,
+      muted: video.muted || video.volume === 0,
     });
   }
 
   function allowed() {
     return !disposed && page.visibilityState === 'visible'
-      && intent !== 'pause' && (intent === 'play' || !motion.matches);
+      && (intent === 'play' || !motion.matches);
   }
 
   function start() {
@@ -36,13 +37,10 @@ export function createHeroPlayback(
       return;
     }
     if (!video.paused) return;
-    // Set the DOM properties too: autoplay decisions must see the muted state.
-    video.muted = true;
-    video.defaultMuted = true;
     pending = video.play();
     const attempt = pending;
     void attempt.catch(() => {
-      // A rejected attempt keeps the play button available. Do not force a retry loop.
+      // The sound button can start a blocked video with an explicit user gesture.
     }).finally(() => {
       if (pending === attempt) pending = null;
       if (disposed) return;
@@ -80,6 +78,7 @@ export function createHeroPlayback(
   video.addEventListener('canplay', onReady);
   video.addEventListener('playing', report);
   video.addEventListener('pause', report);
+  video.addEventListener('volumechange', report);
   video.addEventListener('error', report);
   page.addEventListener('visibilitychange', sync);
   browser.addEventListener('pageshow', sync);
@@ -88,16 +87,16 @@ export function createHeroPlayback(
   sync();
 
   return {
-    toggle() {
-      if (!video.paused || pending) {
-        intent = 'pause';
-        video.autoplay = false;
-        video.pause();
-        report();
-      } else {
+    toggleSound() {
+      if (disposed) return;
+      const enableSound = video.muted || video.volume === 0;
+      video.muted = !enableSound;
+      if (enableSound) {
+        if (video.volume === 0) video.volume = 1;
         intent = 'play';
         start();
       }
+      report();
     },
     dispose() {
       disposed = true;
@@ -106,6 +105,7 @@ export function createHeroPlayback(
       video.removeEventListener('canplay', onReady);
       video.removeEventListener('playing', report);
       video.removeEventListener('pause', report);
+      video.removeEventListener('volumechange', report);
       video.removeEventListener('error', report);
       page.removeEventListener('visibilitychange', sync);
       browser.removeEventListener('pageshow', sync);

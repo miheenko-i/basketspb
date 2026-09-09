@@ -9,6 +9,8 @@ class Video extends EventTarget {
   ended = false;
   error = null;
   readyState = 0;
+  muted = false;
+  volume = 1;
   playCalls = 0;
   attempts = [];
   play() {
@@ -42,7 +44,7 @@ test('cached media is visible without waiting for another canplay event', async 
   assert.equal(video.autoplay, true);
   assert.equal(video.muted, true);
   assert.equal(video.defaultMuted, true);
-  assert.deepEqual(states.at(-1), { playing: true, ready: true });
+  assert.deepEqual(states.at(-1), { playing: true, ready: true, muted: true });
   playback.dispose();
 });
 
@@ -71,10 +73,12 @@ test('a page loaded in the background starts when it becomes visible', async () 
   playback.dispose();
 });
 
-test('manual pause survives readiness events and a page restore', async () => {
-  const { video, browser, page, playback } = setup();
+test('enabled sound survives readiness events and a page restore', async () => {
+  const { video, browser, page, playback, states } = setup();
   await settle();
-  playback.toggle();
+  playback.toggleSound();
+  assert.equal(video.muted, false);
+  assert.equal(states.at(-1).muted, false);
   video.dispatchEvent(new Event('canplay'));
   page.visibilityState = 'hidden';
   page.dispatchEvent(new Event('visibilitychange'));
@@ -82,9 +86,9 @@ test('manual pause survives readiness events and a page restore', async () => {
   browser.dispatchEvent(new Event('pageshow'));
   page.dispatchEvent(new Event('visibilitychange'));
   await settle();
-  assert.equal(video.playCalls, 1);
-  assert.equal(video.paused, true);
-  assert.equal(video.autoplay, false);
+  assert.equal(video.playCalls, 2);
+  assert.equal(video.paused, false);
+  assert.equal(video.muted, false);
   playback.dispose();
 });
 
@@ -108,7 +112,7 @@ test('reduced motion disables autoplay but still permits explicit playback', asy
   const { video, motion, playback } = setup({ reduced: true });
   assert.equal(video.playCalls, 0);
   assert.equal(video.autoplay, false);
-  playback.toggle();
+  playback.toggleSound();
   await settle();
   assert.equal(video.paused, false);
   motion.dispatchEvent(new Event('change'));
@@ -117,16 +121,50 @@ test('reduced motion disables autoplay but still permits explicit playback', asy
   playback.dispose();
 });
 
-test('blocked autoplay does not loop and the play button can retry', async () => {
+test('blocked autoplay does not loop and enabling sound can retry', async () => {
   const video = new Video();
   video.attempts.push(() => Promise.reject(new DOMException('Autoplay blocked', 'NotAllowedError')));
   const { playback, states } = setup({ video });
   await settle();
   assert.equal(video.playCalls, 1);
   assert.equal(states.at(-1).playing, false);
-  playback.toggle();
+  playback.toggleSound();
   await settle();
   assert.equal(video.paused, false);
+  assert.equal(video.muted, false);
+  playback.dispose();
+});
+
+test('muting sound leaves the video playing and stays muted after a restore', async () => {
+  const { video, playback, page, states } = setup();
+  await settle();
+  playback.toggleSound();
+  playback.toggleSound();
+  assert.equal(video.paused, false);
+  assert.equal(video.playCalls, 1);
+  assert.equal(video.muted, true);
+  assert.equal(states.at(-1).muted, true);
+  page.visibilityState = 'hidden';
+  page.dispatchEvent(new Event('visibilitychange'));
+  page.visibilityState = 'visible';
+  page.dispatchEvent(new Event('visibilitychange'));
+  await settle();
+  assert.equal(video.paused, false);
+  assert.equal(video.muted, true);
+  playback.dispose();
+});
+
+test('the control reflects zero volume and restores audible volume on activation', async () => {
+  const { video, playback, states } = setup();
+  await settle();
+  playback.toggleSound();
+  video.volume = 0;
+  video.dispatchEvent(new Event('volumechange'));
+  assert.equal(states.at(-1).muted, true);
+  playback.toggleSound();
+  assert.equal(video.volume, 1);
+  assert.equal(video.muted, false);
+  assert.equal(states.at(-1).muted, false);
   playback.dispose();
 });
 
@@ -139,6 +177,8 @@ test('disposing removes lifecycle listeners and ignores a pending attempt', asyn
   const reports = states.length;
   resolveAttempt();
   browser.dispatchEvent(new Event('pageshow'));
+  video.dispatchEvent(new Event('volumechange'));
+  playback.toggleSound();
   await settle();
   assert.equal(video.playCalls, 1);
   assert.equal(states.length, reports);
