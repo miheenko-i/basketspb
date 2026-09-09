@@ -64,10 +64,55 @@
   margin: 0;
 }
 
-.program-description {
-  max-width: 52ch;
-  color: #535b60;
+.program-skills {
+  --skill-background: #edf4f8;
+  --skill-border: #d2e1eb;
+  --skill-check: #336582;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .625rem;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
+
+.freestyle-card .program-skills {
+  --skill-background: #faf0ef;
+  --skill-border: #edd7d4;
+  --skill-check: #ab443e;
+}
+
+.program-skill[data-slot="badge"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: .5rem;
+  width: fit-content;
+  max-width: 100%;
+  height: auto;
+  min-height: 2.75rem;
+  padding: .625rem .875rem .625rem .625rem;
+  border: 1px solid var(--skill-border);
+  border-radius: 999px;
+  background: var(--skill-background);
+  color: #1b2932;
+  white-space: normal;
+  overflow: visible;
+}
+
+.program-skill-check {
+  display: grid;
+  place-items: center;
+  flex: 0 0 1.375rem;
+  width: 1.375rem;
+  height: 1.375rem;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--skill-check);
+}
+
+.program-skill-label { min-width: 0; overflow-wrap: anywhere; }
 
 .program-cta {
   --cta-size: 50px;

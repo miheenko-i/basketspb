@@ -74,7 +74,6 @@ h3,
 .section-heading { gap: 1.25rem; }
 .section-intro { margin-top: 1.25rem; }
 
-.program-description,
 .growth-steps p,
 .about-description,
 .coaches p,
@@ -94,6 +93,7 @@ h3,
 }
 
 .program-copy { gap: 1rem; }
+.program-skill[data-slot="badge"] { font-size: var(--type-body); font-weight: 500; line-height: 1.4; letter-spacing: 0; }
 .coaches h3 { margin-bottom: .875rem; }
 .team-description,
 .camp-activities p,
