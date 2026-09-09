@@ -1,7 +1,6 @@
 /* Keep section backgrounds full width, with a shared, centered content edge. */
 :root {
   --content-width: 1760px;
-  --hero-width: 1920px;
 }
 
 .section,
@@ -17,11 +16,36 @@
 
 .hero,
 .camp-hero {
-  --hero-gutter: max(var(--page-gutter), min(80px, calc((100% - var(--content-width)) / 2)));
+  --hero-gutter: max(var(--page-gutter), calc((100% - var(--content-width)) / 2));
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
   width: 100%;
-  max-width: var(--hero-width);
-  margin-inline: auto;
-  padding-inline: var(--hero-gutter);
+  max-width: none;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  align-items: center;
+  background: #171b1e;
+}
+
+.hero-media,
+.camp-hero-media {
+  position: relative;
+  isolation: isolate;
+  grid-area: 1 / 1;
+  width: 100%;
+  align-self: start;
+}
+
+.hero-media { aspect-ratio: 16 / 9; }
+.camp-hero-media { aspect-ratio: 1680 / 907; }
+
+.hero-media .hero-shade,
+.camp-hero-media .camp-hero-shade {
+  z-index: 0;
 }
 
 .hero-image,
@@ -29,17 +53,41 @@
 .camp-hero-image {
   object-fit: contain;
   object-position: center;
+  z-index: 0;
 }
 
 .hero-main,
 .camp-hero-content {
-  width: 100%;
-  max-width: var(--content-width);
+  position: relative;
+  grid-area: 1 / 1;
+  z-index: 1;
+  width: min(calc(100% - 2 * var(--page-gutter)), var(--content-width));
+  max-width: none;
+  margin-top: 0;
   margin-inline: auto;
+  padding-block: clamp(40px, 5vw, 80px);
+  pointer-events: none;
+}
+
+.hero-main button,
+.camp-hero-content a {
+  pointer-events: auto;
+}
+
+.hero-video-control {
+  z-index: 2;
+  bottom: 30px;
+  right: var(--hero-gutter);
+}
+
+.hero-down {
+  z-index: 2;
+  bottom: 30px;
+  right: calc(var(--hero-gutter) + 59px);
 }
 
 /* Fill bounded media frames while preserving the source image proportions. */
-.program-card {
+.program-media {
   aspect-ratio: 3 / 2;
 }
 
@@ -48,7 +96,7 @@
   transition: filter .2s;
 }
 
-.program-card:hover img {
+.program-media:hover img {
   transform: none;
   filter: brightness(.96);
 }
@@ -70,35 +118,8 @@
 }
 
 @media (min-width: 1181px) {
-  .hero,
-  .camp-hero {
-    height: auto;
-    min-height: 0;
-    max-height: none;
-  }
-
-  .hero {
-    aspect-ratio: 16 / 9;
-  }
-
-  .camp-hero {
-    aspect-ratio: 1680 / 907;
-  }
-
   .hero h1 {
     font-size: clamp(76px, 10.1vw, 158px);
-  }
-
-  .hero-main {
-    margin-top: 0;
-  }
-
-  .hero-down {
-    right: var(--hero-gutter);
-  }
-
-  .hero-video-control {
-    right: calc(var(--hero-gutter) + 59px);
   }
 }
 
@@ -106,4 +127,18 @@
   .site-header {
     --header-gutter: 18px;
   }
+
+  .hero-media,
+  .camp-hero-media,
+  .hero-main,
+  .camp-hero-content {
+    grid-area: auto;
+  }
+
+  .hero-main,
+  .camp-hero-content { padding-block: 32px 40px; }
+  .hero-media .hero-shade,
+  .camp-hero-media .camp-hero-shade { background: linear-gradient(0deg, #171b1e70, transparent 45%); }
+  .hero-video-control { right: 18px; bottom: 18px; }
+  .hero-down { right: var(--page-gutter); bottom: 43px; }
 }

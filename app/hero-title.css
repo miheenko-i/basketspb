@@ -1,0 +1,39 @@
+.hero-title-line {
+  display: block;
+}
+
+.hero-title-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.hero-title-character {
+  display: inline-block;
+}
+
+/* The same movement, easing and letter rhythm as the portfolio hero. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-title-character {
+    animation: hero-letter-reveal 760ms cubic-bezier(.22, 1, .36, 1) both;
+    animation-delay: calc(180ms + var(--letter-index) * 24ms);
+  }
+
+  .hero-title .hero-audience {
+    animation: hero-subtitle-reveal 760ms cubic-bezier(.22, 1, .36, 1) 370ms both;
+  }
+}
+
+@keyframes hero-letter-reveal {
+  from { opacity: 0; transform: translateY(.55em); filter: blur(.08em); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes hero-subtitle-reveal {
+  from { opacity: 0; transform: translateY(1rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media print {
+  .hero-title-character,
+  .hero-title .hero-audience { animation: none; }
+}
