@@ -293,7 +293,6 @@ h3,
   .footer-top > div:first-child { grid-column: auto; }
   .trial-section > div,
   .trial-action { min-width: 0; max-width: 100%; }
-  .news-copy p { grid-column: 1 / -1; }
   /* Keep both meal options visible at a readable size on narrow screens.
      Explicit table roles in the markup retain the row/column relationships. */
   .camp-price-table,
@@ -316,8 +315,4 @@ h3,
   .price-card.featured-price { padding: 1.5rem !important; border-left: 0; min-height: 0; }
   .price-card .price-label { min-height: 0; }
   .price-card .price-note { margin-bottom: 0; min-height: 0; }
-  .news-item { grid-template-columns: 6rem minmax(0, 1fr); }
-  .news-copy { display: contents; }
-  .news-copy h3 { grid-column: 2; grid-row: 2; }
-  .news-copy p { margin-top: .5rem; }
 }
