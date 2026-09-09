@@ -95,6 +95,8 @@ h3,
 .program-copy { gap: 1rem; }
 .program-skill[data-slot="badge"] { font-size: var(--type-body); font-weight: 500; line-height: 1.4; letter-spacing: 0; }
 .coaches h3 { margin-bottom: .875rem; }
+.coaches .coach-role { color: #171b1e; font-weight: 600; }
+.coaches .coach-role + p { margin-top: .625rem; }
 .team-description,
 .camp-activities p,
 .news-copy p { margin-top: 1rem; }
@@ -298,7 +300,7 @@ h3,
   .camp-price-table thead,
   .camp-price-table tbody { display: block; }
   .camp-price-table tr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1rem; }
-  .camp-price-table thead th:first-child { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .camp-price-table thead th:first-child { position: absolute; width: 0.0625rem; height: 0.0625rem; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .camp-price-table th,
   .camp-price-table td { min-width: 0; padding: 1rem 0; }
   .camp-price-table tbody .camp-price-name { grid-column: 1 / -1; width: auto; padding-block: 1rem 0; border-bottom: 0; font-size: var(--type-control); font-weight: 600; }

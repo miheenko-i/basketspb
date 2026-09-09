@@ -9,6 +9,7 @@ import './reveals.css';
 import './news.css';
 import './typography.css';
 import './legal.css';
+import './desktop-scale.css';
 export const metadata: Metadata = {
  metadataBase: new URL('https://miheenko-i.github.io/basketspb/'),
  title: 'Баскетбол для новичков и любителей в Санкт-Петербурге | YO BALLER',

@@ -1,6 +1,6 @@
 /* Keep section backgrounds full width, with a shared, centered content edge. */
 :root {
-  --content-width: 1760px;
+  --content-width: 110rem;
 }
 
 .section,
@@ -65,7 +65,7 @@
   max-width: none;
   margin-top: 0;
   margin-inline: auto;
-  padding-block: clamp(40px, 5vw, 80px);
+  padding-block: clamp(2.5rem, 5vw, 5rem);
   pointer-events: none;
 }
 
@@ -82,54 +82,54 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 56px;
-  height: 56px;
+  width: 3.5rem;
+  height: 3.5rem;
   padding: 0;
-  border: 1px solid #ffffff80;
+  border: 0.0625rem solid #ffffff80;
   border-radius: 50%;
   background: #171b1ed9;
   color: #fff;
 }
-.hero-play-button[data-slot="button"] svg { width: 22px; height: 22px; transform: translateX(1px); }
+.hero-play-button[data-slot="button"] svg { width: 1.375rem; height: 1.375rem; transform: translateX(0.0625rem); }
 .hero-play-button[data-slot="button"]:hover { background: #171b1e; }
 
 .hero-audio-control {
   position: absolute;
   display: flex;
   align-items: center;
-  gap: 8px;
-  width: 164px;
-  height: 47px;
-  padding-right: 15px;
-  border: 1px solid #ffffff80;
-  border-radius: 999px;
+  gap: 0.5rem;
+  width: 10.25rem;
+  height: 2.9375rem;
+  padding-right: 0.9375rem;
+  border: 0.0625rem solid #ffffff80;
+  border-radius: 62.4375rem;
   background: #171b1eb8;
   color: #fff;
   z-index: 2;
-  bottom: 30px;
+  bottom: 1.875rem;
   right: var(--hero-gutter);
 }
 
 .hero-audio-control .hero-video-control {
   position: static;
-  flex: 0 0 42px;
-  width: 42px;
-  height: 42px;
+  flex: 0 0 2.625rem;
+  width: 2.625rem;
+  height: 2.625rem;
   border: 0;
   background: transparent;
 }
 .hero-audio-control .hero-video-control:hover { background: #ffffff20; }
 .hero-volume[data-slot="slider"] { flex: 1; min-width: 0; width: auto; }
-.hero-volume > div { min-height: 40px; }
-.hero-volume [data-slot="slider-track"] { height: 4px; background: #ffffff50; }
+.hero-volume > div { min-height: 2.5rem; }
+.hero-volume [data-slot="slider-track"] { height: 0.25rem; background: #ffffff50; }
 .hero-volume [data-slot="slider-range"] { background: #fff; }
-.hero-volume [data-slot="slider-thumb"] { width: 14px; height: 14px; border: 0; background: #fff; }
-.hero-volume [data-slot="slider-thumb"]:focus-within { outline: 2px solid #fff; outline-offset: 3px; }
+.hero-volume [data-slot="slider-thumb"] { width: 0.875rem; height: 0.875rem; border: 0; background: #fff; }
+.hero-volume [data-slot="slider-thumb"]:focus-within { outline: 0.125rem solid #fff; outline-offset: 0.1875rem; }
 
 .hero-down {
   z-index: 2;
-  bottom: 30px;
-  right: calc(var(--hero-gutter) + 176px);
+  bottom: 1.875rem;
+  right: calc(var(--hero-gutter) + 11rem);
 }
 
 /* Touch devices use system volume; keep only the sound toggle. */
@@ -137,13 +137,13 @@
   .hero-audio-control {
     justify-content: center;
     gap: 0;
-    width: 46px;
-    height: 46px;
+    width: 2.875rem;
+    height: 2.875rem;
     padding: 0;
   }
-  .hero-audio-control .hero-video-control { flex-basis: 44px; width: 44px; height: 44px; }
+  .hero-audio-control .hero-video-control { flex-basis: 2.75rem; width: 2.75rem; height: 2.75rem; }
   .hero-audio-control .hero-volume { display: none; }
-  .hero-down { right: calc(var(--hero-gutter) + 58px); }
+  .hero-down { right: calc(var(--hero-gutter) + 3.625rem); }
 }
 
 /* Fill bounded media frames while preserving the source image proportions. */
@@ -153,12 +153,20 @@
 
 .program-card img {
   object-fit: cover;
-  transition: filter .2s;
+  transition: transform .65s cubic-bezier(.22, 1, .36, 1), filter .2s;
 }
 
 .program-media:hover img {
-  transform: none;
   filter: brightness(.96);
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .program-media:hover img,
+  .program-media:focus-visible img { transform: scale(1.04); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .program-card img { transition: none; }
 }
 
 .coach-photo {
@@ -180,13 +188,13 @@
 @media (min-width: 641px) {
   .hero,
   .camp-hero {
-    --hero-top-offset: 82px;
+    --hero-top-offset: 5.125rem;
     height: calc(90svh - var(--hero-top-offset));
     grid-template-rows: minmax(0, 1fr);
     align-items: stretch;
   }
 
-  .home-page .hero { --hero-top-offset: 116px; }
+  .home-page .hero { --hero-top-offset: 7.25rem; }
 
   .hero-image,
   .hero-video,
@@ -202,16 +210,16 @@
   .hero-main,
   .camp-hero-content {
     align-self: end;
-    padding-block: clamp(24px, 4svh, 56px) 96px;
+    padding-block: clamp(1.5rem, 4svh, 3.5rem) 6rem;
   }
 
-  .hero h1 { font-size: clamp(64px, min(10.1vw, 16svh), 158px); }
-  .camp-hero h1 { font-size: clamp(54px, min(7.9vw, 15svh), 120px); }
+  .hero h1 { font-size: clamp(4rem, min(10.1vw, 16svh), 9.875rem); }
+  .camp-hero h1 { font-size: clamp(3.375rem, min(7.9vw, 15svh), 7.5rem); }
   .hero-audience {
-    font-size: clamp(20px, 3.3svh, 35px);
-    margin-top: clamp(16px, 2.5svh, 24px);
+    font-size: clamp(1.25rem, 3.3svh, 2.1875rem);
+    margin-top: clamp(1rem, 2.5svh, 1.5rem);
   }
-  .hero-bottom { margin-top: clamp(18px, 3svh, 28px); }
+  .hero-bottom { margin-top: clamp(1.125rem, 3svh, 1.75rem); }
 }
 
 /* Preserve readable text in short landscape windows without clipping controls. */
@@ -219,7 +227,7 @@
   .hero,
   .camp-hero {
     height: auto;
-    min-height: 420px;
+    min-height: 26.25rem;
     grid-template-rows: auto;
   }
   .hero-media,
@@ -228,7 +236,7 @@
 
 @media (max-width: 640px) {
   .site-header {
-    --header-gutter: 18px;
+    --header-gutter: 1.125rem;
   }
 
   .hero-media,
@@ -239,9 +247,9 @@
   }
 
   .hero-main,
-  .camp-hero-content { padding-block: 32px 40px; }
+  .camp-hero-content { padding-block: 2rem 2.5rem; }
   .hero-media .hero-shade,
   .camp-hero-media .camp-hero-shade { background: linear-gradient(0deg, #171b1e70, transparent 45%); }
-  .hero-audio-control { right: 18px; bottom: 18px; }
-  .hero-down { right: var(--page-gutter); bottom: 43px; }
+  .hero-audio-control { right: 1.125rem; bottom: 1.125rem; }
+  .hero-down { right: var(--page-gutter); bottom: 2.6875rem; }
 }
