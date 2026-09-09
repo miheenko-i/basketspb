@@ -270,6 +270,7 @@ h3,
 }
 
 @media (max-width: 40rem) {
+  .program-skill[data-slot="badge"] { font-size: .9375rem; }
   .site-header { min-height: 4.5rem; }
   .site-header .wordmark { width: clamp(7.25rem, 32vw, 11.25rem); }
   .announcement { flex-wrap: wrap; gap: .25rem .75rem; }
