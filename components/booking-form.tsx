@@ -55,7 +55,7 @@ export function BookingForm({ venues, venueId, program, audience, onVenueChange,
     data.set('Зал', venue.name);
     data.set('Связаться через', contactMethod);
     data.set('Откуда о нас узнали', source);
-    data.set('_subject', 'BASKETSPB — заявка на тренировку');
+    data.set('_subject', 'YO BALLER — заявка на тренировку');
     data.set('_template', 'table');
     data.set('_url', 'https://miheenko-i.github.io/basketspb/');
     submitting.current = true;
