@@ -45,7 +45,7 @@ test('cached media is visible without waiting for another canplay event', async 
   assert.equal(video.muted, true);
   assert.equal(video.defaultMuted, true);
   assert.equal(video.volume, .5);
-  assert.deepEqual(states.at(-1), { playing: true, ready: true, muted: true, volume: .5 });
+  assert.deepEqual(states.at(-1), { playing: true, ready: true, muted: true, volume: .5, needsPlay: false });
   playback.dispose();
 });
 
@@ -133,6 +133,60 @@ test('blocked autoplay does not loop and enabling sound can retry', async () => 
   await settle();
   assert.equal(video.paused, false);
   assert.equal(video.muted, false);
+  playback.dispose();
+});
+
+test('blocked autoplay offers explicit playback without enabling sound', async () => {
+  const video = new Video();
+  video.attempts.push(() => Promise.reject(new DOMException('Autoplay blocked', 'NotAllowedError')));
+  const { playback, states } = setup({ video });
+  await settle();
+  assert.equal(states.at(-1).needsPlay, true);
+  assert.equal(video.playCalls, 1);
+  playback.play();
+  await settle();
+  assert.equal(video.paused, false);
+  assert.equal(video.muted, true);
+  assert.equal(video.volume, .5);
+  assert.equal(states.at(-1).needsPlay, false);
+  playback.dispose();
+});
+
+test('returning to the hero retries paused playback while respecting reduced motion', async () => {
+  const { video, playback, motion, states } = setup();
+  await settle();
+  video.pause();
+  playback.refresh();
+  await settle();
+  assert.equal(video.playCalls, 2);
+  assert.equal(video.muted, true);
+  motion.matches = true;
+  motion.dispatchEvent(new Event('change'));
+  playback.refresh();
+  assert.equal(video.paused, true);
+  assert.equal(video.playCalls, 2);
+  assert.equal(states.at(-1).needsPlay, true);
+  playback.play();
+  await settle();
+  assert.equal(video.paused, false);
+  assert.equal(video.muted, true);
+  playback.dispose();
+  playback.refresh();
+  playback.play();
+  assert.equal(video.playCalls, 3);
+});
+
+test('metadata readiness retries an interrupted initial load', async () => {
+  const video = new Video();
+  video.attempts.push(() => Promise.reject(new DOMException('Interrupted load', 'AbortError')));
+  const { playback } = setup({ video });
+  await settle();
+  video.readyState = 1;
+  video.dispatchEvent(new Event('loadedmetadata'));
+  await settle();
+  assert.equal(video.playCalls, 2);
+  assert.equal(video.paused, false);
+  assert.equal(video.muted, true);
   playback.dispose();
 });
 

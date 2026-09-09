@@ -28,7 +28,7 @@ export default function Home() {
  const videoRef=useRef<HTMLVideoElement>(null);
  const [videoMuted,setVideoMuted]=useState(true);
  const [videoVolume,setVideoVolume]=useState(.5);
- const [videoReady,setVideoReady]=useState(false);
+ const [videoNeedsPlay,setVideoNeedsPlay]=useState(false);
  const playbackRef=useRef<ReturnType<typeof createHeroPlayback> | null>(null);
  useEffect(()=>{
   const video=videoRef.current;
@@ -36,10 +36,14 @@ export default function Home() {
   const playback=createHeroPlayback(video,{document,window,motion:window.matchMedia('(prefers-reduced-motion: reduce)')},state=>{
    setVideoMuted(state.muted);
    setVideoVolume(state.volume);
-   setVideoReady(state.ready);
+   setVideoNeedsPlay(state.needsPlay);
   });
   playbackRef.current=playback;
-  return()=>{playbackRef.current=null;playback.dispose()};
+  const visibility=new IntersectionObserver(entries=>{
+   if(entries.some(entry=>entry.isIntersecting))playback.refresh();
+  },{threshold:.1});
+  visibility.observe(video);
+  return()=>{visibility.disconnect();playbackRef.current=null;playback.dispose()};
  },[]);
  const toggleSound=()=>playbackRef.current?.toggleSound();
 
@@ -56,10 +60,10 @@ export default function Home() {
   <a className="announcement" href="#schedule">Новый сезон 2026 / 27 <span>Первая тренировка — бесплатно</span><ArrowUpRight size={14}/></a>
   <SiteHeader onBooking={()=>openBooking()}/>
   <main id="main">
-   <section className="hero" aria-labelledby="hero-title"><div className="hero-media"><img className="hero-image" src="/basketspb/images/hero-poster.jpg" alt="Баскетбольная тренировка" fetchPriority="high" width="1600" height="900"/><video ref={videoRef} className={`hero-video ${videoReady?'is-ready':''}`} muted={videoMuted} loop playsInline preload="auto" poster="/basketspb/images/hero-poster.jpg" aria-label="Видео баскетбольной тренировки"><source src="/basketspb/videos/hero.mp4?v=sound-1" type="video/mp4"/></video><div className="hero-shade"/><HeroAudioControl muted={videoMuted} volume={videoVolume} onToggle={toggleSound} onVolumeChange={volume=>playbackRef.current?.setVolume(volume)}/></div><div className="hero-main"><HeroTitle id="hero-title" lines={["БАСКЕТБОЛ", "В СПБ."]} subtitle="Для новичков и любителей"/><div className="hero-bottom"><button className="button orange-button" onClick={()=>openBooking()}>Начать бесплатно <ArrowUpRight size={20}/></button><p>Взрослые и дети.<br/>Баскетбол и баскетбольный фристайл.</p></div></div><a className="hero-down" href="#programs" aria-label="К направлениям"><ArrowDown size={20}/></a></section>
+   <section className="hero" aria-labelledby="hero-title"><div className="hero-media"><img className="hero-image" src="/basketspb/images/hero-poster.jpg" alt="Баскетбольная тренировка" fetchPriority="high" width="1600" height="900"/><video ref={videoRef} className="hero-video" autoPlay muted={videoMuted} loop playsInline preload="auto" poster="/basketspb/images/hero-poster.jpg" aria-label="Видео баскетбольной тренировки"><source src="/basketspb/videos/hero.mp4?v=sound-1" type="video/mp4"/></video><div className="hero-shade"/><HeroAudioControl muted={videoMuted} volume={videoVolume} needsPlay={videoNeedsPlay} onPlay={()=>playbackRef.current?.play()} onToggle={toggleSound} onVolumeChange={volume=>playbackRef.current?.setVolume(volume)}/></div><div className="hero-main"><HeroTitle id="hero-title" lines={["БАСКЕТБОЛ", "В СПБ."]} subtitle="Для новичков и любителей"/><div className="hero-bottom"><button className="button orange-button" onClick={()=>openBooking()}>Начать бесплатно <ArrowUpRight size={20}/></button><p>Взрослые и дети.<br/>Баскетбол и баскетбольный фристайл.</p></div></div><a className="hero-down" href="#programs" aria-label="К направлениям"><ArrowDown size={20}/></a></section>
    <div className="facts-strip"><span>ЛЮБОЙ УРОВЕНЬ</span><span>5 ЗАЛОВ В ГОРОДЕ</span><span>ДЕТИ И ВЗРОСЛЫЕ</span><span>ПРОБНОЕ ЗАНЯТИЕ БЕСПЛАТНО</span></div>
    <section className="section programs" id="programs"><div className="section-heading"><div><h2>НАПРАВЛЕНИЯ</h2></div><p>Научиться мастерски играть в баскетбол или же виртуозно овладеть баскетбольным мячом?</p></div><div className="program-grid">
-    <article className="program-card"><button className="program-media" onClick={()=>openBooking('Баскетбольные навыки')} aria-label="Баскетбол — записаться на пробное"><img src="/basketspb/images/basketball.jpg" alt="Групповая тренировка по дриблингу" loading="lazy" width="1680" height="1120"/><span className="program-cta" aria-hidden="true"><span>Записаться на пробное</span><ArrowUpRight size={22}/></span></button><div className="program-copy"><h3 className="program-title">БАСКЕТБОЛ</h3><ProgramSkills label="Навыки на тренировках по баскетболу" skills={['Постановка броска', 'Дриблинг', 'Финты', 'Скорость', 'Координация', 'Выносливость', 'Общая физическая подготовка']}/></div></article>
+    <article className="program-card"><button className="program-media" onClick={()=>openBooking('Баскетбольные навыки')} aria-label="Баскетбол — записаться на пробное"><img src="/basketspb/images/basketball.jpg" alt="Групповая тренировка по дриблингу" loading="lazy" width="1680" height="1120"/><span className="program-cta" aria-hidden="true"><span>Записаться на пробное</span><ArrowUpRight size={22}/></span></button><div className="program-copy"><h3 className="program-title">БАСКЕТБОЛ</h3><ProgramSkills label="Навыки на тренировках по баскетболу" skills={['Постановка броска', 'Дриблинг', 'Финты', 'Выносливость', 'Координация', 'Скорость', 'Общая физическая подготовка']}/></div></article>
     <article className="program-card freestyle-card"><button className="program-media" onClick={()=>openBooking('Баскетбольный фристайл')} aria-label="Баскетбольный фристайл — записаться на пробное"><img src="/basketspb/images/freestyle.jpg" alt="Баскетбольный фристайлер выполняет трюк с мячом" loading="lazy" width="1680" height="1120"/><span className="program-cta" aria-hidden="true"><span>Записаться на пробное</span><ArrowUpRight size={22}/></span></button><div className="program-copy"><h3 className="program-title">ФРИСТАЙЛ</h3><ProgramSkills label="Навыки на тренировках по фристайлу" skills={['Ловкость', 'Выносливость', 'Упорство', 'Креативность', 'Нестандартное мышление', 'Физическая сила', 'Настойчивость']}/></div></article>
    </div><div className="program-footnote"><a href="#team">Познакомиться с преподавателями <ArrowRight size={17}/></a></div></section>
    <section className="section growth-section" id="growth"><div className="section-heading"><h2>ПРОСТАЯ СИСТЕМА РОСТА<br/>ОТ НОВИЧКА ДО ЛЮБИТЕЛЯ</h2></div><ol className="growth-steps">

@@ -8,7 +8,7 @@ type PlaybackEnvironment = {
 export function createHeroPlayback(
   video: HTMLVideoElement,
   environment: PlaybackEnvironment,
-  onState: (state: { playing: boolean; ready: boolean; muted: boolean; volume: number }) => void,
+  onState: (state: { playing: boolean; ready: boolean; muted: boolean; volume: number; needsPlay: boolean }) => void,
 ) {
   const { document: page, window: browser, motion } = environment;
   let intent: 'auto' | 'play' = 'auto';
@@ -16,6 +16,7 @@ export function createHeroPlayback(
   let pending: Promise<void> | null = null;
   let retryAfterPending = false;
   let audibleVolume = .5;
+  let playRejected = false;
 
   function report() {
     if (video.volume > 0) audibleVolume = video.volume;
@@ -24,6 +25,8 @@ export function createHeroPlayback(
       ready: video.readyState >= 2 && !video.error,
       muted: video.muted || video.volume === 0,
       volume: video.volume,
+      needsPlay: page.visibilityState === 'visible' && video.paused && !video.error && !pending
+        && (playRejected || motion.matches || video.readyState >= 2),
     });
   }
 
@@ -40,10 +43,12 @@ export function createHeroPlayback(
       return;
     }
     if (!video.paused) return;
+    playRejected = false;
     pending = video.play();
     const attempt = pending;
     void attempt.catch(() => {
-      // The sound button can start a blocked video with an explicit user gesture.
+      // A separate play button lets users keep sound off when autoplay is blocked.
+      if (!disposed) playRejected = true;
     }).finally(() => {
       if (pending === attempt) pending = null;
       if (disposed) return;
@@ -79,6 +84,7 @@ export function createHeroPlayback(
   video.volume = .5;
   video.playsInline = true;
   video.addEventListener('loadeddata', onReady);
+  video.addEventListener('loadedmetadata', onReady);
   video.addEventListener('canplay', onReady);
   video.addEventListener('playing', report);
   video.addEventListener('pause', report);
@@ -91,6 +97,12 @@ export function createHeroPlayback(
   sync();
 
   return {
+    refresh() { sync(); },
+    play() {
+      if (disposed) return;
+      intent = 'play';
+      start();
+    },
     toggleSound() {
       if (disposed) return;
       const enableSound = video.muted || video.volume === 0;
@@ -116,6 +128,7 @@ export function createHeroPlayback(
       disposed = true;
       video.autoplay = false;
       video.removeEventListener('loadeddata', onReady);
+      video.removeEventListener('loadedmetadata', onReady);
       video.removeEventListener('canplay', onReady);
       video.removeEventListener('playing', report);
       video.removeEventListener('pause', report);
