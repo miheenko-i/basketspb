@@ -61,29 +61,38 @@ export function ScrollReveals() {
       }
     }
 
+    function prepareElement(element: HTMLElement) {
+      const bounds = element.getBoundingClientRect();
+      // Skip blocks above a restored scroll position, including direct anchor links.
+      if (seen.has(element) || bounds.bottom <= 0) {
+        seen.add(element);
+        return;
+      }
+      const parent = element.parentElement!;
+      const order = siblingOrder.get(parent) ?? 0;
+      siblingOrder.set(parent, order + 1);
+      element.style.setProperty('--reveal-delay', `${Math.min(order, 3) * 65}ms`);
+      // Content already in view also gets a one-time entrance animation.
+      if (bounds.top < window.innerHeight * .84 && bounds.bottom > 0) {
+        reveal(element);
+        return;
+      }
+      element.dataset.reveal = 'pending';
+      observer.observe(element);
+    }
+
     function prepare() {
       reset();
       if (motion.matches) return;
       siblingOrder.clear();
+      elements.forEach(prepareElement);
+    }
 
-      for (const element of elements) {
-        const bounds = element.getBoundingClientRect();
-        // Skip blocks above a restored scroll position, including direct anchor links.
-        if (seen.has(element) || bounds.bottom <= 0) {
-          seen.add(element);
-          continue;
-        }
-        const parent = element.parentElement!;
-        const order = siblingOrder.get(parent) ?? 0;
-        siblingOrder.set(parent, order + 1);
-        element.style.setProperty('--reveal-delay', `${Math.min(order, 3) * 65}ms`);
-        // Content already in view also gets a one-time entrance animation.
-        if (bounds.top < window.innerHeight * .84 && bounds.bottom > 0) {
-          reveal(element);
-          continue;
-        }
-        element.dataset.reveal = 'pending';
-        observer.observe(element);
+    function registerNewContent() {
+      for (const element of document.querySelectorAll<HTMLElement>(targets)) {
+        if (elements.includes(element)) continue;
+        elements.push(element);
+        if (!motion.matches) prepareElement(element);
       }
     }
 
@@ -101,10 +110,12 @@ export function ScrollReveals() {
     prepare();
     motion.addEventListener('change', prepare);
     document.addEventListener('focusin', onFocus);
+    document.addEventListener('site:content-added', registerNewContent);
     return () => {
       reset();
       motion.removeEventListener('change', prepare);
       document.removeEventListener('focusin', onFocus);
+      document.removeEventListener('site:content-added', registerNewContent);
     };
   }, []);
 
