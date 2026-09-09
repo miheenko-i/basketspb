@@ -25,7 +25,7 @@
   font-weight: 400;
   font-stretch: normal;
   font-display: swap;
-  src: url(/fonts/font-0.ttf) format('truetype');
+  src: url(/basketspb/fonts/font-0.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Roboto';
@@ -33,7 +33,7 @@
   font-weight: 500;
   font-stretch: normal;
   font-display: swap;
-  src: url(/fonts/font-1.ttf) format('truetype');
+  src: url(/basketspb/fonts/font-1.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Roboto';
@@ -41,7 +41,7 @@
   font-weight: 600;
   font-stretch: normal;
   font-display: swap;
-  src: url(/fonts/font-2.ttf) format('truetype');
+  src: url(/basketspb/fonts/font-2.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Roboto';
@@ -49,7 +49,7 @@
   font-weight: 700;
   font-stretch: normal;
   font-display: swap;
-  src: url(/fonts/font-3.ttf) format('truetype');
+  src: url(/basketspb/fonts/font-3.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Roboto';
@@ -57,7 +57,7 @@
   font-weight: 800;
   font-stretch: normal;
   font-display: swap;
-  src: url(/fonts/font-4.ttf) format('truetype');
+  src: url(/basketspb/fonts/font-4.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Roboto';
@@ -65,26 +65,35 @@
   font-weight: 900;
   font-stretch: normal;
   font-display: swap;
-  src: url(/fonts/font-5.ttf) format('truetype');
+  src: url(/basketspb/fonts/font-5.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Roboto Condensed';
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url(/fonts/font-6.ttf) format('truetype');
+  src: url(/basketspb/fonts/font-6.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Roboto Condensed';
   font-style: normal;
   font-weight: 800;
   font-display: swap;
-  src: url(/fonts/font-7.ttf) format('truetype');
+  src: url(/basketspb/fonts/font-7.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Roboto Condensed';
   font-style: normal;
   font-weight: 900;
   font-display: swap;
-  src: url(/fonts/font-8.ttf) format('truetype');
+  src: url(/basketspb/fonts/font-8.ttf) format('truetype');
 }
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-3;opacity:0}.hero-video.is-ready{opacity:1}.hero-video-control{position:absolute;bottom:53px;right:calc(var(--page-gutter) + 59px);height:47px;width:47px;background:#0003;color:#fff;border:1px solid #ffffff80;border-radius:50%;display:grid;place-items:center}.hero-video-control:hover{background:#ffffff25}.hero-image{object-position:center}.hero-video-control:focus-visible{outline-color:#fff}
+@media(max-width:640px){.hero-video{object-position:60% center}.hero-video-control{bottom:43px;right:calc(var(--page-gutter) + 50px);width:40px;height:40px}.hero-bottom p{max-width:calc(100% - 105px)}.hero-bottom p{font-size:13px}}
+.venue-anchors{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #cecece;padding-bottom:20px;margin-bottom:0}.venue-anchors a{display:flex;align-items:center;gap:9px;white-space:nowrap;font-size:14px;font-weight:500;padding:10px 7px}.venue-anchors a:first-child{padding-left:0}.venue-anchors a:hover{color:#c83a0a}.venue-anchors .metro-dot{background:#ff5a23;border-color:#ff5a23}.venue-section{scroll-margin-top:24px;border-bottom:1px solid #d0d0d0;padding-bottom:35px}.venue-section:last-child{border:0;padding-bottom:0}.venue-section .schedule-body{padding-top:37px;min-height:0}.venue-section .duration{margin-top:20px}.venue-section .venue-info h3{font-size:35px}.all-venues .sessions-top{padding-bottom:18px}.venue-section .session-row{padding:18px 0}.venue-section:target{background:#ececec;outline:12px solid #ececec}
+@media(max-width:900px){.venue-anchors{overflow-x:auto;justify-content:flex-start;gap:24px}.venue-section .schedule-body{grid-template-columns:1fr 1.2fr;gap:25px}.venue-section .venue-info{display:block}.venue-section .venue-info>p{margin:0;font-size:14px}.venue-section .venue-info .map-link{margin-top:14px}.venue-section .sessions-top{flex-wrap:wrap}.venue-section .session-row{flex-wrap:wrap;gap:12px}.venue-section .session-row>div{flex-basis:100%}.venue-section .session-row strong{flex:1}}
+@media(max-width:640px){.venue-section .schedule-body{grid-template-columns:1fr;gap:28px;padding-top:30px}.venue-section{padding-bottom:30px}.venue-section .session-row>div{flex-basis:auto}.venue-section .session-row strong{flex:initial}.venue-anchors{gap:20px;padding-bottom:15px}.venue-anchors a{font-size:13px}.venue-section:target{outline-width:8px}}
+.price-card.featured-price{position:relative;background:#28231f;border-top:3px solid #ff5a23;margin-top:-3px}.price-card.featured-price:hover{background:#332b25}.featured-price .price-label{display:flex;flex-direction:column;align-items:flex-start;gap:10px}.saving-badge{display:inline-flex;border-radius:3px;background:#ff5a23;color:#131313;padding:4px 7px;font-size:10px;font-weight:700;letter-spacing:.035em;white-space:nowrap}.featured-price strong{font-size:clamp(52px,5vw,78px);margin-top:18px;line-height:1}.per-training{font-size:15px;color:#ff8f67;margin-top:7px;font-weight:500}.featured-price .package-total{font-size:15px;color:#fff;margin-top:17px;min-height:0}.saving-note{font-size:11px;color:#bfb8b3;margin-top:10px;line-height:1.5}.price-card{min-height:320px}.price-action{margin-top:auto;padding-top:27px}.price-card:not(.featured-price) .price-note{margin-bottom:25px}.featured-price .price-action{color:#ff8f67}
+@media(max-width:640px){.featured-price strong{font-size:59px}.price-card{min-height:290px}.per-training{font-size:13px}.featured-price .package-total{font-size:13px;line-height:1.5}.saving-badge{font-size:9px;padding:4px 6px}.saving-note{font-size:10px}.price-action{margin-top:auto}.price-card.featured-price{padding-right:12px!important}}
+.price-terms{display:block;margin-top:25px}.price-terms .season-note{max-width:none;font-size:12px;margin-bottom:28px}.price-documents{display:grid;grid-template-columns:1.4fr 1fr;border-top:1px solid #424242;border-bottom:1px solid #424242;align-items:start}.price-documents details{width:100%;max-width:none;padding:23px 30px 23px 0}.price-documents summary{margin:0;font-size:15px;color:#fff;line-height:1.5}.price-documents details p{font-size:13px;line-height:1.8;padding-left:17px}.rules-link{padding:22px 0 22px 30px;border-left:1px solid #424242;display:flex;align-items:center;justify-content:space-between;gap:20px;color:#fff;font-size:15px}.rules-link small{display:block;margin-top:5px;font-size:12px;color:#aaa}.rules-link:hover{color:#ff8f67}
+@media(max-width:640px){.price-documents{grid-template-columns:1fr}.price-documents details{padding:20px 0}.rules-link{padding:20px 0;border-left:0;border-top:1px solid #424242}.price-terms .season-note{margin-bottom:23px}}
