@@ -24,6 +24,20 @@
   padding-inline: var(--hero-gutter);
 }
 
+.hero-image,
+.hero-video,
+.camp-hero-image {
+  object-fit: contain;
+  object-position: center;
+}
+
+.hero-main,
+.camp-hero-content {
+  width: 100%;
+  max-width: var(--content-width);
+  margin-inline: auto;
+}
+
 /* Fill bounded media frames while preserving the source image proportions. */
 .program-card {
   aspect-ratio: 3 / 2;
@@ -71,19 +85,11 @@
     aspect-ratio: 1680 / 907;
   }
 
-  .hero-image,
-  .hero-video,
-  .camp-hero-image {
-    object-fit: cover;
-    object-position: center;
-  }
-
   .hero h1 {
     font-size: clamp(76px, 10.1vw, 158px);
   }
 
   .hero-main {
-    max-width: 1200px;
     margin-top: 0;
   }
 
